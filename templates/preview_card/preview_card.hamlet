@@ -1,10 +1,10 @@
 <div .preview_card>
 
-  <div .card_image>
-    <img src=#{image params} />
+  <div .card_image style="order:#{previewOrder params};">
+    <img src=#{previewImage params} />
 
   <div .content>
-    <h2> #{title params}
-    <p> #{text params}
+    <h2> #{previewTitle params}
+    <p> #{previewText params}
     <div .card_links>
       <a .round_button href="#"> Learn More

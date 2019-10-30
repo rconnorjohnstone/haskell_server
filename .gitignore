@@ -20,3 +20,5 @@ cabal.sandbox.config
 *~
 \#*
 hackend.cabal
+*.jpg
+*.png
