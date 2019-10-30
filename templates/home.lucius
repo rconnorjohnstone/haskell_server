@@ -6,6 +6,7 @@ html {
 
 h1, h2, h3 {
   color: white;
+  font-family: 'Roboto Condensed', sans-serif;
   margin: 0 0 0 0;
   font-weight: normal;
 }
@@ -20,6 +21,7 @@ h2 {
 
 h4, h5, h6, p, a {
   color: white;
+  font-family: 'Raleway', sans-serif;
 }
 
 a {
