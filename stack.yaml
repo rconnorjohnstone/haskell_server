@@ -40,6 +40,12 @@ packages:
 #   commit: e7b331f14bcffb8367cd58fbfc8b40ec7642100a
 #
 # extra-deps: []
+extra-deps:
+  - mime-mail-0.4.14
+  - HaskellNet-0.5.1
+  - HaskellNet-SSL-0.3.4.1
+  - connection-0.2.8
+  - socks-0.5.6
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

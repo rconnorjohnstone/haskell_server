@@ -1,0 +1,81 @@
+.contact_wrapper 
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+
+label
+  font-size: 1.625em;
+
+.form_thing
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: hsla(0, 0%, 100%, 5%);
+  color: white;
+  font-size: 0.75rem;
+  border: 1px solid hsla(0, 0%, 60%, 100%);
+  border-radius: 5px;
+  line-height: 2;
+  width: 100%;
+  font-family: 'Proza Libre';
+  padding: 0.25rem 0.5rem;
+
+input
+  width: 100%;
+  font-size: 1.25rem;
+
+textarea
+  width: 56vw;
+  height: 10rem;
+  font-size: 1.25rem;
+
+.required 
+  display: flex;
+  flex-direction: column;
+  margin: 3% 2%;
+  min-width: 45%;
+
+.contact_wrapper button 
+  margin: 0 auto;
+  display: block;
+
+#name
+  box-sizing: border-box;
+  width: 50%;
+  display: inline-block;
+  padding: 0 6% 0 2%;
+
+#email
+  box-sizing: border-box;
+  width: 50%;
+  display: inline-block;
+  padding: 0 2% 0 6%;
+
+#message
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 2% 2rem 2%;
+  font-family: 'Proza Libre';
+
+form
+  background-color: hsla(0, 0%, 100%, 5%);
+  color: white;
+  font-size: 0.75rem;
+  border: 1px solid hsla(0, 0%, 60%, 100%);
+  border-radius: 5px;
+  line-height: 2;
+  width: 100%;
+  font-family: 'Proza Libre';
+  padding: 0.25rem 0.5rem;
+
+#extra_bottom_space
+  margin: 0 auto 1.5rem auto;
+  
+
+@media only screen and (orientation: portrait) 
+  .contact_wrapper 
+    width: 75%;
+  
+

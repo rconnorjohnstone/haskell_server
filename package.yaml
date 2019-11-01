@@ -42,6 +42,9 @@ dependencies:
 - case-insensitive
 - wai
 - foreign-store
+- mime-mail >= 0.4.0
+- HaskellNet >= 0.5.1
+- HaskellNet-SSL >= 0.3.4.1
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.

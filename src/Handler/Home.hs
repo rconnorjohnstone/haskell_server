@@ -7,7 +7,12 @@
 module Handler.Home where
 
 import Text.Hamlet (hamletFile)
-import Import
+import Network.HaskellNet.Auth
+import Network.HaskellNet.SMTP
+import Network.HaskellNet.SMTP.SSL
+import Network.Mail.Mime
+import Data.Text (append)
+import Import hiding (authenticate)
 
 homeLayout :: Widget -> Handler Html
 homeLayout widget = do
@@ -25,9 +30,9 @@ data ProjectCard = ProjectCard {projectTitle :: Text,
                                 projectImage :: Text,
                                 projectUrl :: Text} deriving (Show, Read)
 
-data Contacter = Contacter {name :: Maybe Text,
+data Contacter = Contacter {name :: Text,
                             email :: Text,
-                            message :: Text} deriving (Show, Read)
+                            message :: Textarea} deriving (Show, Read)
 
 -------------------------------------------------------------------------------
 
@@ -63,9 +68,9 @@ projects cards = $(widgetFile "projects/projects")
 
 contacterForm :: Html -> MForm Handler (FormResult Contacter, Widget)
 contacterForm = renderDivs $ Contacter
-    <$> aopt textField "Name" Nothing
+    <$> areq textField "Name" Nothing
     <*> areq emailField "Email" Nothing
-    <*> areq textField "Message" Nothing
+    <*> areq textareaField "Message" Nothing
 
 -------------------------------------------------------------------------------
 
@@ -86,8 +91,21 @@ postContactR :: Handler Html
 postContactR = do
   ((result, contactWidget), enctype) <- runFormPost contacterForm
   case result of
-    FormSuccess contacter -> defaultLayout [whamlet|<p>#{show contacter}|]
-    _ -> defaultLayout
+    FormSuccess contacter -> do
+      let body = (name contacter) `append` "\n\n" `append` (email contacter) `append` "\n\n" `append` (unTextarea $ message contacter)
+      liftIO $ doSMTPSSL "smtp.gmail.com" $ \connection -> do
+        succeeded <- authenticate LOGIN
+                                  "robot@richardconnorjohnstone.com"
+                                  "<qS3B2CA"
+                                  connection
+        when succeeded $
+          sendPlainTextMail "connor@richardconnorjohnstone.com" 
+                            "robot@richardconnorjohnstone.com" 
+                            "New Contact" 
+                            (fromStrict body)
+                            connection
+      getHomeR
+    _ -> homeLayout
       [whamlet|
         <p>Invalid input, let's try again.
         <form method=post action=@{ContactR} enctype=#{enctype}>
