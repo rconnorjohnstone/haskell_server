@@ -44,6 +44,7 @@ a {
   letter-spacing: 2px;
   align-self: baseline;
   margin: auto;
+  font-family: 'Raleway', sans-serif;
 }
 
 .round_button:hover {

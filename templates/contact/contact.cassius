@@ -12,24 +12,28 @@ label
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background-color: hsla(0, 0%, 100%, 5%);
-  color: white;
-  font-size: 0.75rem;
-  border: 1px solid hsla(0, 0%, 60%, 100%);
-  border-radius: 5px;
-  line-height: 2;
-  width: 100%;
-  font-family: 'Proza Libre';
-  padding: 0.25rem 0.5rem;
 
 input
   width: 100%;
+  background-color: hsla(0, 0%, 100%, 5%);
+  color: white;
+  border: 1px solid hsla(0, 0%, 60%, 100%);
+  border-radius: 5px;
   font-size: 1.25rem;
+  font-family: 'Proza Libre';
+  padding: 0.25rem 0.5rem;
 
 textarea
   width: 56vw;
   height: 10rem;
   font-size: 1.25rem;
+  background-color: hsla(0, 0%, 100%, 5%);
+  color: white;
+  border: 1px solid hsla(0, 0%, 60%, 100%);
+  font-size: 1.25rem;
+  border-radius: 5px;
+  font-family: 'Proza Libre';
+  padding: 0.25rem 0.5rem;
 
 .required 
   display: flex;
@@ -57,18 +61,6 @@ textarea
   box-sizing: border-box;
   width: 100%;
   padding: 0 2% 2rem 2%;
-  font-family: 'Proza Libre';
-
-form
-  background-color: hsla(0, 0%, 100%, 5%);
-  color: white;
-  font-size: 0.75rem;
-  border: 1px solid hsla(0, 0%, 60%, 100%);
-  border-radius: 5px;
-  line-height: 2;
-  width: 100%;
-  font-family: 'Proza Libre';
-  padding: 0.25rem 0.5rem;
 
 #extra_bottom_space
   margin: 0 auto 1.5rem auto;
