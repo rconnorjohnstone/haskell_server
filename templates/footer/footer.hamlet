@@ -1,0 +1,18 @@
+<div .footer_wrapper>
+
+  <div .footer_links>
+
+    <a href="https://www.github.com/rconnorjohnstone" >
+      <p>
+        <i .fa .fa-github>
+    <a href="https://www.instagram.com/r_connor_johnstone/" >
+      <p>
+        <i .fa .fa-instagram>
+    <a href="https://www.linkedin.com/in/rconnorjohnstone/" >
+      <p>
+        <i .fa .fa-linkedin>
+    <a href="mailto:connor@richardconnorjohnstone.com" >
+      <p>
+        <i .fa .fa-envelope-open>
+
+  <p> &copy; Richard Connor Johnstone
