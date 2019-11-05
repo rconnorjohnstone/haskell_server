@@ -16,8 +16,9 @@ import Import hiding (authenticate)
 
 homeLayout :: Widget -> Handler Html
 homeLayout widget = do
-  pc <- do
-    widgetToPageContent widget
+  pc <- widgetToPageContent $ do
+    widget
+    $(widgetFile "site-layout")
   withUrlRenderer $(hamletFile "templates/site-layout-wrapper.hamlet")
 
 
@@ -79,20 +80,23 @@ getHomeR = do
   (contactWidget, enctype) <- generateFormPost contacterForm
   homeLayout $ do
     setTitle "Richard Connor Johnstone"
-    $(widgetFile "home")
     $(widgetFile "banner/banner")
     previewCard aboutMeParams
     previewCard recentParams
     previewCard resourceParams
     projects [imdProject, attProject, wmsProject]
     $(widgetFile "contact/contact")
+    $(widgetFile "footer/footer")
 
 postContactR :: Handler Html
 postContactR = do
   ((result, contactWidget), enctype) <- runFormPost contacterForm
   case result of
     FormSuccess contacter -> do
-      let body = (name contacter) `append` "\n\n" `append` (email contacter) `append` "\n\n" `append` (unTextarea $ message contacter)
+      let body = (name contacter) `append` 
+                 "\n\n" `append` 
+                 (email contacter) `append` 
+                 "\n\n" `append` (unTextarea $ message contacter)
       liftIO $ doSMTPSSL "smtp.gmail.com" $ \connection -> do
         succeeded <- authenticate LOGIN
                                   "robot@richardconnorjohnstone.com"

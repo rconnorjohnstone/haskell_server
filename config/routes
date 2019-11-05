@@ -9,6 +9,7 @@
 
 / HomeR GET
 /contact ContactR POST
+/about AboutR GET
 
 /comments CommentR POST
 

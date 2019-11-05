@@ -1,0 +1,25 @@
+<div .navBar>
+  <div .navLinks>
+    <div exact .navBarLink .mobile_menu>
+      <button>
+        <i .fa .fa-bars>
+      <div .open_menu>
+        <NavLink exact .navBarLink .mobileNav to="/">
+          Home
+        <NavLink .navBarLink .mobileNav to="/about">
+          About
+        <NavLink .navBarLink .mobileNav to="/resources">
+          Resources
+        <NavLink .navBarLink .mobileNav to="/contact">
+          Contact
+    <NavLink exact .navBarLink .regularNav to="/">
+      Home
+    <NavLink .navBarLink .regularNav to="/about">
+      About
+    <NavLink .navBarLink .regularNav to="/resources">
+      Resources
+    <NavLink .navBarLink .regularNav to="/contact">
+      Contact
+  <div .logo>
+    Richard <strong>Connor</strong> Johnstone
+<div .empty>
