@@ -12,6 +12,7 @@ import Network.HaskellNet.SMTP
 import Network.HaskellNet.SMTP.SSL
 import Network.Mail.Mime
 import Data.Text (append)
+import System.Environment
 import Import hiding (authenticate)
 
 homeLayout :: Widget -> Handler Html
@@ -94,9 +95,10 @@ postContactR = do
     FormSuccess contacter -> do
       let body = (name contacter) `append` "\n\n" `append` (email contacter) `append` "\n\n" `append` (unTextarea $ message contacter)
       liftIO $ doSMTPSSL "smtp.gmail.com" $ \connection -> do
+        robotPass <- getEnv "ROBOT_PASS"
         succeeded <- authenticate LOGIN
                                   "robot@richardconnorjohnstone.com"
-                                  "<qS3B2CA"
+                                  robotPass
                                   connection
         when succeeded $
           sendPlainTextMail "connor@richardconnorjohnstone.com" 
