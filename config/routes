@@ -10,6 +10,7 @@
 / HomeR GET
 /contact ContactR POST
 /about AboutR GET
+/christmas XmasR GET
 
 /comments CommentR POST
 
