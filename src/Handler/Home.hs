@@ -110,7 +110,7 @@ postContactR = do
                             "New Contact" 
                             (fromStrict body)
                             connection
-      getHomeR
+      redirect HomeR
     _ -> homeLayout
       [whamlet|
         <p>Invalid input, let's try again.

@@ -2,14 +2,13 @@
   display: flex;
   flex-direction: row;
   background-color: black;
-  justify-content: space-between; align-items: flex-end;
+  justify-content: space-between; 
+  align-items: flex-end;
   position: fixed;
-
 
 .navBar, .empty 
   height: 5vw;
   width: 100%;
-
 
 .navLinks 
   width: 30vw;
@@ -19,59 +18,47 @@
   height: 100%;
   align-items: flex-end;
 
-
 .navBarLink 
   font-size: 1.35rem;
-
 
 .activeNav 
   color:  #a644fc;
 
-
 .logo 
   color: white;
   font-size: 2.25rem;
-
+  padding: 0 5%;
 
 .mobile_menu 
   align-self: center;
-
 
 .fa-bars 
   font-size: 2.5rem;
   margin: auto 2vh;
   display: none;
 
-
 .mobileNav 
   display: none;
-
 
 input[type=checkbox] 
   display: none;
 
-
 button 
   display: none;
-
 
 @media only screen and (orientation: portrait) 
   .navBar, .empty 
     height: 7vh;
   
-
   .navBarLink 
     font-size: 1rem;
   
-
   .regularNav 
     display: none;
   
-
   .fa-bars 
     display: block;
   
-
   button 
     display: block;
     background: black;
@@ -79,15 +66,12 @@ button
     border: none;
     outline: none;
   
-
   .logo 
     font-size: 2.5rem;
   
-
   .fa-bars:hover 
     color: green;
   
-
   .open_menu 
     position: absolute;
     top: 7vh;
@@ -96,22 +80,15 @@ button
     width: 100vw;
     display: block;
   
-
   .open_menu .mobileNav 
     display: block;
     font-size: 2.0rem;
     margin: 5vh;
       
-
-
 @media only screen and (orientation:portrait) and (max-aspect-ratio: 3/4) 
   .logo 
     font-size: 1.875rem;
   
-
-
 @media only screen and (orientation:portrait) and (max-aspect-ratio: 11/19) 
   .logo 
     font-size: 1.55rem;
-  
-
