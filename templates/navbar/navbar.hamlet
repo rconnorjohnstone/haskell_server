@@ -1,24 +1,26 @@
 <div .navBar>
-  <div .navLinks>
-    <div .navBarLink .mobile_menu>
-      <i onclick="toggleBurger()" .dropbtn .fa .fa-bars>
-      <div .dropdown-content #myDropdown>
-        <a .navBarLink .mobileNav href=@{HomeR}>
-          Home
-        <a .navBarLink .mobileNav href=@{AboutR}>
-          About
-        <a .navBarLink .mobileNav href="#">
-          Resources
-        <a .navBarLink .mobileNav href="#">
-          Contact
-    <a .navBarLink .regularNav href=@{HomeR}>
-      Home
-    <a .navBarLink .regularNav href=@{AboutR}>
-      About
-    <a .navBarLink .regularNav href="#">
-      Resources
-    <a .navBarLink .regularNav href="#">
-      Contact
+  <div .navLinkBox>
+    <div .navLinks>
+      <div .navBarLink .mobile_menu>
+        <i onclick="toggleBurger()" .dropbtn .fa .fa-bars>
+        <div .dropdown-content #myDropdown>
+          <a .navBarLink .mobileNav href=@{HomeR}>
+            Home
+          <a .navBarLink .mobileNav href=@{AboutR}>
+            About
+          <a .navBarLink .mobileNav href="#">
+            Resources
+          <a .navBarLink .mobileNav href="#">
+            Contact
+      <a .navBarLink .regularNav href=@{HomeR}>
+        Home
+      <a .navBarLink .regularNav href=@{AboutR}>
+        About
+      <a .navBarLink .regularNav href="#">
+        Resources
+      <a .navBarLink .regularNav href="#">
+        Contact
   <div .logo>
-    Richard <strong>Connor</strong> Johnstone
+    <p>
+      Richard <strong>Connor</strong> Johnstone
 <div .empty>
