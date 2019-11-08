@@ -11,6 +11,7 @@
 /contact ContactR POST
 /about AboutR GET
 /christmas XmasR GET
+/resources ResourcesR GET
 
 /comments CommentR POST
 
