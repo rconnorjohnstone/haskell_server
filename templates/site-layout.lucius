@@ -28,6 +28,12 @@ a {
   text-decoration: none;
 }
 
+.article {
+  width: 65%;
+  min-width: 500px;
+  margin: 5% auto;
+}
+
 .round_button {
   box-sizing: border-box;
   display: block;
@@ -59,5 +65,10 @@ a {
 
   .round_button {
     min-width: 30vh;
+  }
+
+  .article {
+    width: 80%;
+    min-width: 100px;
   }
 }

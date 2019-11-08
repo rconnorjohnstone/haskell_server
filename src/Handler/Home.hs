@@ -14,14 +14,7 @@ import Network.Mail.Mime
 import Data.Text (append)
 import System.Environment
 import Import hiding (authenticate)
-
-homeLayout :: Widget -> Handler Html
-homeLayout widget = do
-  pc <- widgetToPageContent $ do
-    widget
-    $(widgetFile "site-layout")
-  withUrlRenderer $(hamletFile "templates/site-layout-wrapper.hamlet")
-
+import Layouts.HomeLayout
 
 data PreviewCardParams = PreviewCardParams {previewTitle :: Text,
                                             previewText :: Text,
@@ -47,7 +40,7 @@ recentParams :: PreviewCardParams
 recentParams = PreviewCardParams "Recent Blog Post"  "This will be my most recent blog post" "/static/img/recent.jpg" 2 "recent" "/"
 
 resourceParams :: PreviewCardParams
-resourceParams = PreviewCardParams "Resources" "A section for my resume, gallery, CAD examples, and whatever else I feel like uploading." "/static/img/resources.jpg" 0 "resources" "/"
+resourceParams = PreviewCardParams "Resources" "A section for my resume, gallery, CAD examples, and whatever else I feel like uploading." "/static/img/resources.jpg" 0 "resources" "/resources"
 
 -------------------------------------------------------------------------------
 

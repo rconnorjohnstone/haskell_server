@@ -25,6 +25,8 @@ stanzas:
       # to. The primary hostname will be used for generating your application
       # root.
       - www.richardconnorjohnstone.com
+      - www.rconnorjohnstone.com
+      - www.richardcjohnstone.com
       - 3.133.251.235
 
     # Enable to force Keter to redirect to https
@@ -34,7 +36,7 @@ stanzas:
   # Static files.
   - type: static-files
     hosts:
-      - static.richardconnorjohnstone.com.com
+      - static.rconnorjohnstone.com
     root: ../static
 
     # Uncomment to turn on directory listings.
@@ -47,6 +49,28 @@ stanzas:
       - richardconnorjohnstone.com
     actions:
       - host: www.richardconnorjohnstone.com
+         #secure: false
+         #port: 80
+
+  # Redirect plain domain name to www.
+  - type: redirect
+
+    hosts:
+      - rconnorjohnstone.com
+    actions:
+      - host: www.rconnorjohnstone.com
+         #secure: false
+         #port: 80
+
+    # Uncomment to switch to a non-permanent redirect.
+    # status: 303
+
+  - type: redirect
+
+    hosts:
+      - richardcjohnstone.com
+    actions:
+      - host: www.richardcjohnstone.com
          #secure: false
          #port: 80
 

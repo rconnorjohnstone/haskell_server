@@ -1,19 +1,18 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE QuasiQuotes       #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TypeFamilies #-}
 
-module Handler.About where
+module Handler.Resources where
 
-import Import 
 import Layouts.HomeLayout
+import Import 
 
 -------------------------------------------------------------------------------
 
-getAboutR :: Handler Html
-getAboutR = homeLayout $ do
-    setTitle "About Me - Richard Connor Johnstone"
+getResourcesR :: Handler Html
+getResourcesR = homeLayout $ do
+    setTitle "Resources - Richard Connor Johnstone"
     $(widgetFile "navbar/navbar")
-    $(widgetFile "about/about")
+    $(widgetFile "resources/resources")

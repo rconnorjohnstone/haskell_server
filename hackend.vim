@@ -14,7 +14,7 @@ badd +95 ~/.config/nvim/init.vim
 badd +13 config/settings.yml
 badd +1 config/routes
 badd +1 handler
-badd +89 src/Handler/Home.hs
+badd +1 src/Handler/Home.hs
 badd +4 templates/homepage.hamlet
 badd +1 templates/homepage.lucius
 badd +1 templates/homepage.julius
@@ -41,10 +41,19 @@ badd +1 templates/contact/contact.cassius
 badd +46 package.yaml
 badd +1 stack.yaml
 badd +1 templates/footer/footer.hamlet
-badd +0 templates/footer/footer.cassius
-badd +0 src/Handler/About.hs
+badd +1 templates/footer/footer.cassius
+badd +27 src/Handler/About.hs
 badd +1 templates/navbar/navbar.hamlet
-badd +0 templates/navbar/navbar.cassius
+badd +1 templates/navbar/navbar.cassius
+badd +94 config/keter.yml
+badd +0 templates/about/about.hamlet
+badd +1 templates/about/about.cassius
+badd +1 templates/christmas/christmas.cassius
+badd +73 templates/site-layout.lucius
+badd +1 src/Handler/Resources.hs
+badd +0 templates/resources/resources.hamlet
+badd +4 Layouts/HomeLayout.hs
+badd +0 src/Layouts/HomeLayout.hs
 argglobal
 %argdel
 $argadd app/main.hs
@@ -65,9 +74,9 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe '2resize ' . ((&lines * 20 + 22) / 44)
+exe '2resize ' . ((&lines * 25 + 26) / 53)
 exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
-exe '3resize ' . ((&lines * 20 + 22) / 44)
+exe '3resize ' . ((&lines * 24 + 26) / 53)
 exe 'vert 3resize ' . ((&columns * 116 + 116) / 233)
 argglobal
 setlocal fdm=syntax
@@ -78,12 +87,12 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 44 - ((35 * winheight(0) + 20) / 41)
+let s:l = 171 - ((26 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-44
-normal! 027|
+171
+normal! 026|
 wincmd w
 argglobal
 if bufexists("src/Application.hs") | buffer src/Application.hs | else | edit src/Application.hs | endif
@@ -95,12 +104,12 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 53 - ((0 * winheight(0) + 10) / 20)
+let s:l = 49 - ((19 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-53
-normal! 0
+49
+normal! 024|
 lcd ~/Projects/hackend
 wincmd w
 argglobal
@@ -113,19 +122,41 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 36 - ((0 * winheight(0) + 10) / 20)
+let s:l = 12 - ((8 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-36
+12
 normal! 0
 lcd ~/Projects/hackend
 wincmd w
 exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe '2resize ' . ((&lines * 20 + 22) / 44)
+exe '2resize ' . ((&lines * 25 + 26) / 53)
 exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
-exe '3resize ' . ((&lines * 20 + 22) / 44)
+exe '3resize ' . ((&lines * 24 + 26) / 53)
 exe 'vert 3resize ' . ((&columns * 116 + 116) / 233)
+tabedit ~/Projects/hackend/src/Layouts/HomeLayout.hs
+set splitbelow splitright
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
 tabedit ~/Projects/hackend/templates/site-layout-wrapper.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -137,8 +168,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -148,11 +179,11 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 5 - ((4 * winheight(0) + 20) / 41)
+let s:l = 4 - ((3 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+4
 normal! 05|
 wincmd w
 argglobal
@@ -165,16 +196,167 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 tabedit ~/Projects/hackend/stack.yaml
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+wincmd w
+wincmd w
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe '1resize ' . ((&lines * 24 + 26) / 53)
+exe 'vert 1resize ' . ((&columns * 77 + 116) / 233)
+exe '2resize ' . ((&lines * 25 + 26) / 53)
+exe 'vert 2resize ' . ((&columns * 77 + 116) / 233)
+exe 'vert 3resize ' . ((&columns * 77 + 116) / 233)
+exe 'vert 4resize ' . ((&columns * 77 + 116) / 233)
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 50 - ((13 * winheight(0) + 12) / 24)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+50
+normal! 03|
+lcd ~/Projects/hackend
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/config/keter.yml") | buffer ~/Projects/hackend/config/keter.yml | else | edit ~/Projects/hackend/config/keter.yml | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 4 - ((3 * winheight(0) + 12) / 25)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+4
+normal! 074|
+lcd ~/Projects/hackend
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/package.yaml") | buffer ~/Projects/hackend/package.yaml | else | edit ~/Projects/hackend/package.yaml | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 46 - ((5 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+46
+normal! 017|
+lcd ~/Projects/hackend
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/config/routes") | buffer ~/Projects/hackend/config/routes | else | edit ~/Projects/hackend/config/routes | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 14 - ((13 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+14
+normal! 025|
+lcd ~/Projects/hackend
+wincmd w
+exe '1resize ' . ((&lines * 24 + 26) / 53)
+exe 'vert 1resize ' . ((&columns * 77 + 116) / 233)
+exe '2resize ' . ((&lines * 25 + 26) / 53)
+exe 'vert 2resize ' . ((&columns * 77 + 116) / 233)
+exe 'vert 3resize ' . ((&columns * 77 + 116) / 233)
+exe 'vert 4resize ' . ((&columns * 77 + 116) / 233)
+tabedit ~/Projects/hackend/src/Handler/Home.hs
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd t
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 43 - ((39 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+43
+normal! 0191|
+lcd ~/Projects/hackend
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/templates/home.lucius") | buffer ~/Projects/hackend/templates/home.lucius | else | edit ~/Projects/hackend/templates/home.lucius | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 03|
+lcd ~/Projects/hackend
+wincmd w
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
+tabedit ~/Projects/hackend/src/Handler/About.hs
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -200,16 +382,16 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 48 - ((20 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-48
-normal! 03|
+1
+normal! 0
 lcd ~/Projects/hackend
 wincmd w
 argglobal
-if bufexists("~/Projects/hackend/package.yaml") | buffer ~/Projects/hackend/package.yaml | else | edit ~/Projects/hackend/package.yaml | endif
+if bufexists("~/Projects/hackend/templates/about/about.hamlet") | buffer ~/Projects/hackend/templates/about/about.hamlet | else | edit ~/Projects/hackend/templates/about/about.hamlet | endif
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -218,16 +400,16 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 46 - ((0 * winheight(0) + 20) / 41)
+let s:l = 15 - ((8 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-46
-normal! 017|
+15
+normal! 0901|
 lcd ~/Projects/hackend
 wincmd w
 argglobal
-if bufexists("~/Projects/hackend/config/routes") | buffer ~/Projects/hackend/config/routes | else | edit ~/Projects/hackend/config/routes | endif
+if bufexists("~/Projects/hackend/templates/about/about.cassius") | buffer ~/Projects/hackend/templates/about/about.cassius | else | edit ~/Projects/hackend/templates/about/about.cassius | endif
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -236,18 +418,18 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 11 - ((0 * winheight(0) + 20) / 41)
+let s:l = 5 - ((4 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-11
-normal! 022|
+5
+normal! 0
 lcd ~/Projects/hackend
 wincmd w
 exe 'vert 1resize ' . ((&columns * 77 + 116) / 233)
 exe 'vert 2resize ' . ((&columns * 77 + 116) / 233)
 exe 'vert 3resize ' . ((&columns * 77 + 116) / 233)
-tabedit ~/Projects/hackend/src/Handler/Home.hs
+tabedit ~/Projects/hackend/src/Handler/Resources.hs
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -269,16 +451,16 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 82 - ((5 * winheight(0) + 20) / 41)
+let s:l = 18 - ((17 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-82
-normal! 05|
+18
+normal! 037|
 lcd ~/Projects/hackend
 wincmd w
 argglobal
-if bufexists("~/Projects/hackend/templates/home.lucius") | buffer ~/Projects/hackend/templates/home.lucius | else | edit ~/Projects/hackend/templates/home.lucius | endif
+if bufexists("~/Projects/hackend/templates/resources/resources.hamlet") | buffer ~/Projects/hackend/templates/resources/resources.hamlet | else | edit ~/Projects/hackend/templates/resources/resources.hamlet | endif
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -287,39 +469,17 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 1
-normal! 03|
+normal! 024|
 lcd ~/Projects/hackend
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
 exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
-tabedit ~/Projects/hackend/src/Handler/About.hs
-set splitbelow splitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-argglobal
-setlocal fdm=syntax
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=2
-setlocal fml=1
-setlocal fdn=10
-setlocal nofen
-let s:l = 24 - ((23 * winheight(0) + 20) / 41)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-24
-normal! 05|
-lcd ~/Projects/hackend
 tabedit ~/Projects/hackend/templates/navbar/navbar.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -331,8 +491,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -342,7 +502,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal fen
-let s:l = 16 - ((15 * winheight(0) + 20) / 41)
+let s:l = 16 - ((11 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -360,7 +520,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -368,8 +528,8 @@ normal! zt
 normal! 0
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 tabedit ~/Projects/hackend/templates/banner/banner.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -381,8 +541,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -392,7 +552,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -410,7 +570,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -418,8 +578,8 @@ normal! zt
 normal! 0
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 tabedit ~/Projects/hackend/templates/preview_card/preview_card.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -431,8 +591,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -442,7 +602,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 2 - ((1 * winheight(0) + 20) / 41)
+let s:l = 2 - ((1 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -460,7 +620,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 14 - ((0 * winheight(0) + 20) / 41)
+let s:l = 14 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -468,8 +628,8 @@ normal! zt
 normal! 0
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 113 + 116) / 233)
 tabedit ~/Projects/hackend/templates/projects/projects.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -481,8 +641,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 119 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -492,7 +652,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 15 - ((8 * winheight(0) + 20) / 41)
+let s:l = 15 - ((13 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -510,7 +670,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 36 - ((30 * winheight(0) + 20) / 41)
+let s:l = 36 - ((35 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -518,8 +678,8 @@ normal! zt
 normal! 011|
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 116 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 116 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 119 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 119 + 116) / 233)
 tabedit ~/Projects/hackend/templates/contact/contact.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -531,8 +691,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 129 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 136 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 99 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 133 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -542,7 +702,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 7 - ((5 * winheight(0) + 23) / 47)
+let s:l = 7 - ((5 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -560,7 +720,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 62 - ((14 * winheight(0) + 23) / 47)
+let s:l = 62 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -568,8 +728,8 @@ normal! zt
 normal! 05|
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 129 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 136 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 99 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 133 + 116) / 233)
 tabedit ~/Projects/hackend/templates/footer/footer.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -581,8 +741,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 132 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 133 + 116) / 233)
+exe 'vert 1resize ' . ((&columns * 102 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 130 + 116) / 233)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -592,7 +752,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 7 - ((6 * winheight(0) + 23) / 47)
+let s:l = 7 - ((5 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -610,7 +770,7 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 8 - ((7 * winheight(0) + 23) / 47)
+let s:l = 8 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -618,9 +778,9 @@ normal! zt
 normal! 02|
 lcd ~/Projects/hackend
 wincmd w
-exe 'vert 1resize ' . ((&columns * 132 + 116) / 233)
-exe 'vert 2resize ' . ((&columns * 133 + 116) / 233)
-tabnext 6
+exe 'vert 1resize ' . ((&columns * 102 + 116) / 233)
+exe 'vert 2resize ' . ((&columns * 130 + 116) / 233)
+tabnext 7
 set stal=1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
