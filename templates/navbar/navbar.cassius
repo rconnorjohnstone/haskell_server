@@ -5,6 +5,10 @@
   justify-content: space-between; 
   align-items: flex-end;
   position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  padding: 0 0 1% 0;
 
 .navBar, .empty 
   height: 5vw;
@@ -32,19 +36,16 @@
 .mobile_menu 
   align-self: center;
 
+.dropdown-content
+  display: none;
+
 .fa-bars 
   font-size: 2.5rem;
   margin: auto 2vh;
   display: none;
 
-.mobileNav 
-  display: none;
-
-input[type=checkbox] 
-  display: none;
-
-button 
-  display: none;
+.show
+  display: block;
 
 @media only screen and (orientation: portrait) 
   .navBar, .empty 
@@ -59,31 +60,27 @@ button
   .fa-bars 
     display: block;
   
-  button 
-    display: block;
-    background: black;
-    color: white;
-    border: none;
-    outline: none;
-  
   .logo 
     font-size: 2.5rem;
   
   .fa-bars:hover 
     color: green;
   
-  .open_menu 
+  .dropdown-content 
     position: absolute;
     top: 7vh;
     background: black;
-    /*height: 93vh;*/
     width: 100vw;
-    display: block;
+    display: none;
   
-  .open_menu .mobileNav 
+  .dropdown-content .mobileNav 
     display: block;
-    font-size: 2.0rem;
+    font-size: 4.0rem;
     margin: 5vh;
+
+  .show
+    display: block;
+
       
 @media only screen and (orientation:portrait) and (max-aspect-ratio: 3/4) 
   .logo 

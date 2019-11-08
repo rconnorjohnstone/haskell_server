@@ -25,3 +25,4 @@ getXmasR = homeLayout $ do
     setTitle "Christmas List - Richard Connor Johnstone"
     $(widgetFile "navbar/navbar")
     $(widgetFile "christmas/christmas")
+    $(widgetFile "footer/footer")

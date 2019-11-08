@@ -1,6 +1,6 @@
 <div .preview_card>
 
-  <div .card_image style="order:#{previewOrder params};">
+  <div .card_image id=#{previewId params} style="order:#{previewOrder params};">
     <img src=#{previewImage params} />
 
   <div .content>
