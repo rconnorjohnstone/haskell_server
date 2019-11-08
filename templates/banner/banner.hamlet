@@ -3,9 +3,9 @@
     <h1> Richard Connor Johnstone
     <p> Aerospace Engineer, Software Developer, Private Pilot
     <div .banner_links>
-      <a href=@{AboutR} .round_button> About Me
-      <button type="button" .round_button> Resources
-      <button type="button" .round_button> Blog
-      <button type="button" .round_button> Projects
+      <a href=#about .round_button> About Me
+      <a href=#resources .round_button> Resources
+      <a href=#recent .round_button> Blog
+      <a href=#projects .round_button> Projects
   <div .main_image>
     <img src="/static/img/banner.jpg" />
