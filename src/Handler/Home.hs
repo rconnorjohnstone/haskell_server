@@ -1,16 +1,11 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
-{-# LANGUAGE QuasiQuotes       #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE TypeFamilies #-}
+
 module Handler.Home where
 
-import Text.Hamlet (hamletFile)
 import Network.HaskellNet.Auth
 import Network.HaskellNet.SMTP
 import Network.HaskellNet.SMTP.SSL
-import Network.Mail.Mime
 import Data.Text (append)
 import System.Environment
 import Import hiding (authenticate)
@@ -108,4 +103,4 @@ postContactR = do
                             (fromStrict body)
                             connection
       redirect HomeR
-    _ -> redirect HomeR
+    _ -> getHomeR

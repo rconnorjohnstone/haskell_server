@@ -1,15 +1,15 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Handler.About where
+module Handler.NewPost where
 
-import Import 
 import Layouts.HomeLayout
+import Import 
 
 -------------------------------------------------------------------------------
 
-getAboutR :: Handler Html
-getAboutR = homeLayout $ do
-    setTitle "About Me - Richard Connor Johnstone"
+getNewPostR :: Handler Html
+getNewPostR = homeLayout $ do
+    setTitle "Create a New Blog Post"
     $(widgetFile "navbar/navbar")
-    $(widgetFile "about/about")
+    $(widgetFile "footer/footer")

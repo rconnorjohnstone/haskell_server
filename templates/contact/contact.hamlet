@@ -1,4 +1,4 @@
-<div .contact_wrapper>
+<div .contact_wrapper #contact>
 
   <h2> Get In Touch
 

@@ -12,6 +12,7 @@
 /about AboutR GET
 /christmas XmasR GET
 /resources ResourcesR GET
+/posts/new NewPostR GET
 
 /comments CommentR POST
 
