@@ -24,8 +24,8 @@ badd +7 src/Handler/NewHome.hs
 badd +1 src/Handler/Profile.hs
 badd +1 src/Handler/Comment.hs
 badd +17 src/Handler/Common.hs
-badd +1 templates/site-layout-wrapper.hamlet
-badd +3 templates/site-layout-wrapper.lucius
+badd +5 templates/site-layout-wrapper.hamlet
+badd +1 templates/site-layout-wrapper.lucius
 badd +1 ~/Projects/react_site/src/App.css
 badd +1 templates/home.lucius
 badd +1 templates/banner/banner.hamlet
@@ -58,6 +58,7 @@ badd +0 README.md
 badd +14 config/models.persistentmodels
 badd +0 src/Model.hs
 badd +0 src/Handler/NewPost.hs
+badd +0 templates/site-layout.hamlet
 argglobal
 %argdel
 $argadd app/main.hs
@@ -113,11 +114,21 @@ exe 'vert 1resize ' . ((&columns * 116 + 133) / 266)
 exe 'vert 2resize ' . ((&columns * 149 + 133) / 266)
 tabedit ~/Projects/hackend/src/Layouts/HomeLayout.hs
 set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+wincmd _ | wincmd |
+vsplit
+2wincmd h
+wincmd w
+wincmd w
 wincmd t
 set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
+exe 'vert 1resize ' . ((&columns * 88 + 133) / 266)
+exe 'vert 2resize ' . ((&columns * 88 + 133) / 266)
+exe 'vert 3resize ' . ((&columns * 88 + 133) / 266)
 argglobal
 setlocal fdm=syntax
 setlocal fde=0
@@ -133,7 +144,45 @@ exe s:l
 normal! zt
 1
 normal! 0
-tabedit ~/Projects/hackend/templates/site-layout-wrapper.hamlet
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/templates/site-layout-wrapper.hamlet") | buffer ~/Projects/hackend/templates/site-layout-wrapper.hamlet | else | edit ~/Projects/hackend/templates/site-layout-wrapper.hamlet | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 1 - ((0 * winheight(0) + 23) / 47)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+wincmd w
+argglobal
+if bufexists("~/Projects/hackend/templates/site-layout-wrapper.lucius") | buffer ~/Projects/hackend/templates/site-layout-wrapper.lucius | else | edit ~/Projects/hackend/templates/site-layout-wrapper.lucius | endif
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=2
+setlocal fml=1
+setlocal fdn=10
+setlocal nofen
+let s:l = 3 - ((2 * winheight(0) + 23) / 47)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+3
+normal! 03|
+wincmd w
+exe 'vert 1resize ' . ((&columns * 88 + 133) / 266)
+exe 'vert 2resize ' . ((&columns * 88 + 133) / 266)
+exe 'vert 3resize ' . ((&columns * 88 + 133) / 266)
+tabedit ~/Projects/hackend/templates/site-layout.hamlet
 set splitbelow splitright
 wincmd _ | wincmd |
 vsplit
@@ -155,15 +204,15 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 5 - ((4 * winheight(0) + 23) / 47)
+let s:l = 1 - ((0 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
-normal! 0121|
+1
+normal! 0
 wincmd w
 argglobal
-if bufexists("~/Projects/hackend/templates/site-layout-wrapper.lucius") | buffer ~/Projects/hackend/templates/site-layout-wrapper.lucius | else | edit ~/Projects/hackend/templates/site-layout-wrapper.lucius | endif
+if bufexists("~/Projects/hackend/templates/site-layout.lucius") | buffer ~/Projects/hackend/templates/site-layout.lucius | else | edit ~/Projects/hackend/templates/site-layout.lucius | endif
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -179,6 +228,7 @@ normal! zt
 1
 normal! 0
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 120 + 133) / 266)
 exe 'vert 2resize ' . ((&columns * 145 + 133) / 266)
 tabedit ~/Projects/hackend/config/keter.yml
@@ -276,11 +326,11 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 3 - ((2 * winheight(0) + 23) / 47)
+let s:l = 63 - ((14 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-3
+63
 normal! 0
 lcd ~/Projects/hackend
 wincmd w
@@ -443,11 +493,11 @@ setlocal fdl=2
 setlocal fml=1
 setlocal fdn=10
 setlocal nofen
-let s:l = 1 - ((0 * winheight(0) + 23) / 47)
+let s:l = 18 - ((10 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+18
 normal! 0
 lcd ~/Projects/hackend
 tabedit ~/Projects/hackend/README.md
@@ -523,7 +573,7 @@ lcd ~/Projects/hackend
 wincmd w
 exe 'vert 1resize ' . ((&columns * 132 + 133) / 266)
 exe 'vert 2resize ' . ((&columns * 133 + 133) / 266)
-tabnext 8
+tabnext 3
 set stal=1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
