@@ -11,7 +11,9 @@ import Yesod.Text.Markdown
 
 getViewPostR :: BlogPostId -> Handler Html
 getViewPostR blogPostId = do
+  blogPost <-runDB $ get404 blogPostId
   homeLayout $ do
-    setTitle "Create a New Blog Post"
+    setTitle (toHtml $ blogPostTitle blogPost)
     $(widgetFile "navbar/navbar")
+    $(widgetFile "posts/view")
     $(widgetFile "footer/footer")
