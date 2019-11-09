@@ -16,6 +16,8 @@ import System.Environment
 import Import hiding (authenticate)
 import Layouts.HomeLayout
 
+-------------------------------------------------------------------------------
+
 data PreviewCardParams = PreviewCardParams {previewTitle :: Text,
                                             previewText :: Text,
                                             previewImage :: Text,
@@ -106,10 +108,4 @@ postContactR = do
                             (fromStrict body)
                             connection
       redirect HomeR
-    _ -> homeLayout
-      [whamlet|
-        <p>Invalid input, let's try again.
-        <form method=post action=@{ContactR} enctype=#{enctype}>
-          ^{contactWidget}
-          <button>Submit
-      |]
+    _ -> redirect HomeR
