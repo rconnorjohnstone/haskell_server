@@ -21,3 +21,15 @@ This is a Yesod app, so if you do want to build it (for whatever reason) it's:
 ```bash
 stack exec -- yesod devel
 ```
+
+## To Modify the Production Server
+This is entirely for my own reference, so if you're cloning my repository or something, don't even bother. You don't have the certificate to do this anyway.
+
+```bash
+# To connect over SSH
+ssh -i /path/to/certificate.pem ubuntu@ec2-3-133-251-235.us-east-2.compute.amazonaws.com
+
+# To push a new keter bundle to the server only
+stack exec -- yesod keter
+scp -i /path/to/certificate.pem /path/to/hackend.keter ubuntu@ec2-3-133-251-235.us-east-2.compute.amazonaws.com:/opt/keter/incoming
+```
