@@ -4,6 +4,8 @@ I made the joke on my last repository that I hadn't even finished redesigning my
 
 This is purely a Yesod app now, and coming along pretty nicely. This is mostly meant to be a learning experience for me, so I'm just trying to get my feet wet in Haskell in general and backend Haskell in particular. But I guess also backend programming in particular, and really, I'm still pretty new to web development in general, as everything else I've done so far has been a program intended for the command line. So go easy on me, I'm learning.
 
+To go to the actual website, visit rconnorjohnstone.com or richardcjohnstone.com
+
 ## Features
 
 ### Ported Over

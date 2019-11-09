@@ -16,3 +16,4 @@ getResourcesR = homeLayout $ do
     setTitle "Resources - Richard Connor Johnstone"
     $(widgetFile "navbar/navbar")
     $(widgetFile "resources/resources")
+    $(widgetFile "footer/footer")
