@@ -7,13 +7,13 @@ This is purely a Yesod app now, and coming along pretty nicely. This is mostly m
 ## Features
 
 ### Ported Over
-The whole front page is done, as well as some stuff on the "about" page. There may be some tweaks here and there, but this stuff is mostly inline with the React Site.
+I think literally everything that was on the React site is now ported over. Don't quote me on that.
 
 ### New Stuff
 One of the "backend" type capabilities I needed was to get the email form to actually email me something. It works now.
 
 ### Not Yet Implemented
-I still have to work on all of the pages that aren't the landing page (which isn't much), add some database capabilities, and start working on a good way to do blog posts. At that point, I'll be pretty satisfied with it.
+I still have to add some database capabilities, and start working on a good way to do blog posts. At that point, I'll be pretty satisfied with it.
 
 ## To Build
 This is a Yesod app, so if you do want to build it (for whatever reason) it's:
