@@ -7,11 +7,14 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/ HomeR GET
-/contact ContactR POST
-/about AboutR GET
-/christmas XmasR GET
-/resources ResourcesR GET
+/                     HomeR         GET
+/contact              ContactR      POST
+/about                AboutR        GET
+/christmas            XmasR         GET
+/resources            ResourcesR    GET
+/posts/new            NewPostR      GET POST
+!/posts/#BlogPostId   ViewPostR     GET
+/posts/all            AllPostsR     GET
 
 /comments CommentR POST
 

@@ -8,17 +8,17 @@
             Home
           <a .navBarLink .mobileNav href=@{AboutR}>
             About
-          <a .navBarLink .mobileNav href="#">
+          <a .navBarLink .mobileNav href=@{ResourcesR}>
             Resources
-          <a .navBarLink .mobileNav href="#">
+          <a .navBarLink .mobileNav href="/#contact">
             Contact
       <a .navBarLink .regularNav href=@{HomeR}>
         Home
       <a .navBarLink .regularNav href=@{AboutR}>
         About
-      <a .navBarLink .regularNav href="#">
+      <a .navBarLink .regularNav href=@{ResourcesR}>
         Resources
-      <a .navBarLink .regularNav href="#">
+      <a .navBarLink .regularNav href="/#contact">
         Contact
   <div .logo>
     <p>

@@ -1,0 +1,5 @@
+<div .article>
+  <h1>#{blogPostTitle blogPost}
+
+  <article>
+    #{blogPostArticle blogPost}
