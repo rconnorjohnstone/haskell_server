@@ -14,7 +14,6 @@ blogPostForm = renderDivs $ BlogPost
     <$> areq textField "Title" Nothing
     <*> areq markdownField "Article" Nothing
     
-
 -------------------------------------------------------------------------------
 
 getNewPostR :: Handler Html
