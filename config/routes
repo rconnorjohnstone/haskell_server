@@ -14,6 +14,7 @@
 /resources            ResourcesR    GET
 /posts/new            NewPostR      GET POST
 !/posts/#BlogPostId   ViewPostR     GET
+/posts/all            AllPostsR     GET
 
 /comments CommentR POST
 

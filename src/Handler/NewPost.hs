@@ -31,6 +31,6 @@ postNewPostR = do
   ((res, blogPostWidget), enctype) <- runFormPost blogPostForm
   case res of 
     FormSuccess blogPost -> do
-      _ <- runDB $ insert blogPost
-      error "todo"
+      blogPostId <- runDB $ insert blogPost
+      redirect $ ViewPostR blogPostId
     _ -> getNewPostR

@@ -170,6 +170,7 @@ instance Yesod App where
     isAuthorized XmasR _ = return Authorized
     isAuthorized ResourcesR _ = return Authorized
     isAuthorized NewPostR _ = return Authorized
+    isAuthorized AllPostsR _ = return Authorized
     isAuthorized (ViewPostR _) _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
 
