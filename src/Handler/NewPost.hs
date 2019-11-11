@@ -18,6 +18,7 @@ blogPostForm = renderDivs $ BlogPost
 
 getNewPostR :: Handler Html
 getNewPostR = do
+  maid <- maybeAuthId
   (blogPostWidget, enctype) <- generateFormPost blogPostForm
   homeLayout $ do
     setTitle "Create a New Blog Post"

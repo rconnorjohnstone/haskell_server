@@ -12,8 +12,12 @@
             Resources
           <a .navBarLink .mobileNav href=@{AllPostsR}>
             Blog
-          <a .navBarLink .mobileNav href=@{AllPostsR}>
-            Login
+          $maybe navMaid <- maid
+            <a .navBarLink .mobileNav href=@{AuthR LogoutR}>
+              Logout
+          $nothing
+            <a .navBarLink .mobileNav href=@{AuthR LoginR}>
+              Login
           <a .navBarLink .mobileNav href="/#contact">
             Contact
       <a .navBarLink .regularNav href=@{HomeR}>
@@ -24,8 +28,12 @@
         Resources
       <a .navBarLink .regularNav href=@{AllPostsR}>
         Blog
-      <a .navBarLink .regularNav href=@{AllPostsR}>
-        Login
+      $maybe navMaid <- maid
+        <a .navBarLink .regularNav href=@{AuthR LogoutR}>
+          Logout
+      $nothing
+        <a .navBarLink .regularNav href=@{AuthR LoginR}>
+          Login
       <a .navBarLink .regularNav href="/#contact">
         Contact
   <div .logo>

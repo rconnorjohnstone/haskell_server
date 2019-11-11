@@ -11,6 +11,7 @@ import Yesod.Text.Markdown
 
 getViewPostR :: BlogPostId -> Handler Html
 getViewPostR blogPostId = do
+  maid <- maybeAuthId
   blogPost <-runDB $ get404 blogPostId
   homeLayout $ do
     setTitle (toHtml $ blogPostTitle blogPost)

@@ -177,6 +177,8 @@ instance Yesod App where
         let navbarLeftFilteredMenuItems = [x | x <- navbarLeftMenuItems, menuItemAccessCallback x] 
         let navbarRightFilteredMenuItems = [x | x <- navbarRightMenuItems, menuItemAccessCallback x]
 
+        maid <- maybeAuthId
+
         -- We break up the default layout into two components:
         -- default-layout is the contents of the body tag, and
         -- default-layout-wrapper is the entire page. Since the final
@@ -291,7 +293,7 @@ instance YesodAuth App where
     logoutDest _ = HomeR
     -- Override the above two destinations when a Referer: header is present
     redirectToReferer :: App -> Bool
-    redirectToReferer _ = False
+    redirectToReferer _ = True
 
     -- Need to find the UserId for the given email address.
     authenticate creds = liftHandler $ runDB $ do
