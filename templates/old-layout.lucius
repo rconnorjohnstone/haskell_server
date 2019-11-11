@@ -109,4 +109,8 @@ input {
     width: 80%;
     min-width: 100px;
   }
+
+  #login_button {
+    width: 75%;
+  }
 }
