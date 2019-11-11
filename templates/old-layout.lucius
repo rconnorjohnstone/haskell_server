@@ -69,6 +69,15 @@ input {
   width: 75%;
 }
 
+#forgotPasswordForm {
+  width: 75%;
+  margin: 2rem auto;
+}
+
+#forgotPassword {
+  width: 40%
+}
+
 #login_button {
   width: 45%;
   display: inline-block;
@@ -77,6 +86,10 @@ input {
 
 #register_button {
   width: 45%;
+  margin: 2rem auto;
+}
+
+#forgot_pass_button {
   margin: 2rem auto;
 }
 

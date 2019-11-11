@@ -330,6 +330,7 @@ instance YesodAuthEmail App where
     emailLoginHandler = myEmailLoginHandler
     registerHandler = myRegisterHandler
     setPasswordHandler = mySetPasswordHandler
+    forgotPasswordHandler = myForgotPasswordHandler
 
     afterPasswordRoute _ = HomeR
 
@@ -568,5 +569,39 @@ mySetPasswordHandler needOld = do
             fsTooltip = Nothing,
             fsId = Just "confirmPassword",
             fsName = Just "confirm",
+            fsAttrs = [("autofocus", "")]
+        }
+
+myForgotPasswordHandler :: YesodAuthEmail site => AuthHandler site Html
+myForgotPasswordHandler = do
+    (widget, enctype) <- generateFormPost forgotPasswordForm
+    toParent <- getRouteToParent
+    authLayout $ do
+        setTitleI Msg.PasswordResetTitle
+        [whamlet|
+            <div .article>
+            <h2 .centered>_{Msg.PasswordResetPrompt}
+              <form .centered method=post action=@{toParent forgotPasswordR} enctype=#{enctype}>
+                  <div id="forgotPasswordForm">
+                      ^{widget}
+                      <button .round_button #forgot_pass_button .btn>_{Msg.SendPasswordResetEmail}
+        |]
+  where
+    forgotPasswordForm extra = do
+        (emailRes, emailView) <- mreq emailField emailSettings Nothing
+
+        let forgotPasswordRes = ForgotPasswordForm <$> emailRes
+        let widget = [whamlet|
+                #{extra}
+                ^{fvInput emailView}
+            |]
+        return (forgotPasswordRes, widget)
+
+    emailSettings =
+        FieldSettings {
+            fsLabel = SomeMessage Msg.ProvideIdentifier,
+            fsTooltip = Nothing,
+            fsId = Just "forgotPassword",
+            fsName = Just "email",
             fsAttrs = [("autofocus", "")]
         }
