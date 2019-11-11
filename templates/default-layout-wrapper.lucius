@@ -1,5 +1,5 @@
 html {
-  font-size: max(14pt, 1.35vw);
+  font-size: 1.25vw;
   color: white;
   background-color: #111111;
 }
@@ -7,31 +7,25 @@ html {
 h1, h2, h3 {
   color: white;
   font-family: 'Roboto Condensed', sans-serif;
-  margin: 2rem 0 -0.5rem 0;
+  margin: 0 0 0 0;
   font-weight: normal;
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 2.25rem;
 }
 
-h4, h5, h6, p, a, li {
+h4, h5, h6, p, a {
   color: white;
   font-family: 'Raleway', sans-serif;
 }
 
 a {
   text-decoration: none;
-}
-
-.article {
-  width: 65%;
-  min-width: 500px;
-  margin: 5% auto;
 }
 
 .round_button {
@@ -60,15 +54,10 @@ a {
 
 @media only screen and (orientation: portrait) {
   html {
-    font-size: 1.85vh;
+    font-size: 1.75vh;
   }
 
   .round_button {
     min-width: 30vh;
-  }
-
-  .article {
-    width: 80%;
-    min-width: 100px;
   }
 }

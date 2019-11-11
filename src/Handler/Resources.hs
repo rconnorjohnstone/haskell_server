@@ -10,6 +10,7 @@ import Import
 
 getResourcesR :: Handler Html
 getResourcesR = homeLayout $ do
+    maid <- maybeAuthId
     setTitle "Resources - Richard Connor Johnstone"
     $(widgetFile "navbar/navbar")
     $(widgetFile "resources/resources")

@@ -14,11 +14,11 @@ blogPostForm = renderDivs $ BlogPost
     <$> areq textField "Title" Nothing
     <*> areq markdownField "Article" Nothing
     
-
 -------------------------------------------------------------------------------
 
 getNewPostR :: Handler Html
 getNewPostR = do
+  maid <- maybeAuthId
   (blogPostWidget, enctype) <- generateFormPost blogPostForm
   homeLayout $ do
     setTitle "Create a New Blog Post"
