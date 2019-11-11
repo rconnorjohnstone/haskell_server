@@ -395,15 +395,17 @@ myEmailLoginHandler :: YesodAuthEmail site => (Route Auth -> Route site) -> Widg
 myEmailLoginHandler toParent = do
       (widget, enctype) <- generateFormPost loginForm
       [whamlet|
-        <form method="post" action="@{toParent loginR}" enctype=#{enctype}>
-          <div id="emailLoginForm">
-            ^{widget}
-            <div>
-              <button type=submit .btn .btn-success>
-                _{Msg.LoginViaEmail}
-              &nbsp;
-              <a href="@{toParent registerR}" .btn .btn-default>
-                _{Msg.RegisterLong}
+        <div .article .centered>
+          <h1 .login_header .centered #login_header> Log In
+          <form method="post" action="@{toParent loginR}" enctype=#{enctype} .centered>
+            <div .centered id="emailLoginForm">
+              ^{widget}
+              <div #login_buttons>
+                <button .centered .round_button #login_button type=submit .btn .btn-success>
+                  _{Msg.LoginViaEmail}
+                &nbsp;
+                <a href="@{toParent registerR}" .round_button #login_button .btn .btn-default>
+                  _{Msg.RegisterLong}
       |]
   where
     loginForm extra = do
