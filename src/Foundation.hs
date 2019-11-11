@@ -19,6 +19,8 @@ import Network.HaskellNet.Auth
 import Network.HaskellNet.SMTP
 import qualified Network.HaskellNet.SMTP.SSL as SSL
 import System.Environment
+import qualified Yesod.Auth.Message       as Msg
+import           Control.Applicative      ((<$>), (<*>))
 
 import           Control.Monad            (join)
 import           Control.Monad.Logger     (runNoLoggingT)
@@ -34,7 +36,17 @@ import           Text.Hamlet                   (shamlet)
 import           Text.Shakespeare.Text         (stext)
 import           Yesod
 import           Yesod.Auth
-import           Yesod.Auth.Email
+
+import           Yesod.Form
+import           Control.Applicative      ((<$>), (<*>))
+import           Data.Text                (Text)
+import           Data.Text.Encoding       (decodeUtf8With, encodeUtf8)
+import           Data.Text.Encoding.Error (lenientDecode)
+import           Data.Time                (addUTCTime, getCurrentTime)
+import           Safe                     (readMay)
+import           System.IO.Unsafe         (unsafePerformIO)
+import           Data.Aeson.Types (Parser, Result(..), parseMaybe, withObject, (.:?))
+import           Data.Maybe (isJust)
 
 import Import.NoFoundation hiding (unpack)
 import Database.Persist.Sql (ConnectionPool, runSqlPool)
@@ -46,8 +58,8 @@ import Control.Monad.Logger (LogSource)
 import Yesod.Auth.Dummy
 
 import Yesod.Auth.Email
---import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
 import Yesod.Default.Util   (addStaticContentExternal)
+import Yesod.Core
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
 import qualified Data.CaseInsensitive as CI
@@ -291,12 +303,14 @@ instance YesodAuth App where
     authPlugins :: App -> [AuthPlugin App]
     authPlugins app = [authEmail] ++ extraAuthPlugins
         -- Enable authDummy login if enabled.
-        where extraAuthPlugins = [authDummy | appAuthDummyLogin $ appSettings app]
+        where extraAuthPlugins = []
 
 
 -- Here's all of the email-specific code
 instance YesodAuthEmail App where
     type AuthEmailId App = UserId
+
+    emailLoginHandler = myEmailLoginHandler
 
     afterPasswordRoute _ = HomeR
 
@@ -312,9 +326,9 @@ instance YesodAuthEmail App where
                                         robotPass
                                         connection
           when succeeded $
-            sendPlainTextMail "connor@richardconnorjohnstone.com" 
+            sendPlainTextMail (show email)
                               "robot@richardconnorjohnstone.com" 
-                              "New Contact" 
+                              "Please Verify Your E-mail" 
                               (fromStrict ("Please click the link below to verify:\n" ++ verurl))
                               connection
     getVerifyKey = liftHandler . runDB . fmap (join . fmap userVerkey) . get
@@ -373,4 +387,55 @@ unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 -- https://github.com/yesodweb/yesod/wiki/Serve-static-files-from-a-separate-domain
--- https://github.com/yesodweb/yesod/wiki/i18n-messages-in-the-scaffolding
+
+data UserLoginForm = UserLoginForm { _loginEmail :: Text, _loginPassword :: Text }
+myEmailLoginHandler :: YesodAuthEmail site => (Route Auth -> Route site) -> WidgetFor site ()
+myEmailLoginHandler toParent = do
+      (widget, enctype) <- generateFormPost loginForm
+      [whamlet|
+        <form method="post" action="@{toParent loginR}" enctype=#{enctype}>
+          <div id="emailLoginForm">
+            ^{widget}
+            <div>
+              <button type=submit .btn .btn-success>
+                _{Msg.LoginViaEmail}
+              &nbsp;
+              <a href="@{toParent registerR}" .btn .btn-default>
+                _{Msg.RegisterLong}
+      |]
+  where
+    loginForm extra = do
+      emailMsg <- renderMessage' Msg.Email
+      (emailRes, emailView) <- mreq emailField (emailSettings emailMsg) Nothing
+      passwordMsg <- renderMessage' Msg.Password
+      (passwordRes, passwordView) <- mreq passwordField (passwordSettings passwordMsg) Nothing
+      let userRes = UserLoginForm Control.Applicative.<$> emailRes
+                                  Control.Applicative.<*> passwordRes
+      let widget = [whamlet|
+            #{extra}
+            <div>
+                ^{fvInput emailView}
+            <div>
+                ^{fvInput passwordView}
+        |]      
+      return (userRes, widget)
+    emailSettings emailMsg = do
+      FieldSettings {
+          fsLabel = SomeMessage Msg.Email,
+          fsTooltip = Nothing,
+          fsId = Just "email",
+          fsName = Just "email",
+          fsAttrs = [("autofocus", ""), ("placeholder", emailMsg)]
+      }
+    passwordSettings passwordMsg =
+       FieldSettings {
+          fsLabel = SomeMessage Msg.Password,
+          fsTooltip = Nothing,
+          fsId = Just "password",
+          fsName = Just "password",
+          fsAttrs = [("placeholder", passwordMsg)]
+      }
+    renderMessage' msg = do
+      langs <- languages
+      master <- getYesod
+      return $ renderAuthMessage master langs msg
