@@ -185,6 +185,8 @@ instance Yesod App where
 
         pc <- widgetToPageContent $ do
             --addStylesheet $ StaticR css_bootstrap_css
+            let navbar = $(widgetFile "navbar/navbar")
+            let footer = $(widgetFile "footer/footer")
             $(widgetFile "old-layout")
         withUrlRenderer $(hamletFile "templates/old-layout-wrapper.hamlet")
 
