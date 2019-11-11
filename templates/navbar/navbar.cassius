@@ -31,7 +31,7 @@
   align-items: flex-end;
 
 .navBarLink 
-  font-size: 2vw;
+  font-size: 1.5vw;
 
 .activeNav 
   color:  #a644fc;

@@ -10,6 +10,10 @@
             About
           <a .navBarLink .mobileNav href=@{ResourcesR}>
             Resources
+          <a .navBarLink .mobileNav href=@{AllPostsR}>
+            Blog
+          <a .navBarLink .mobileNav href=@{AllPostsR}>
+            Login
           <a .navBarLink .mobileNav href="/#contact">
             Contact
       <a .navBarLink .regularNav href=@{HomeR}>
@@ -18,6 +22,10 @@
         About
       <a .navBarLink .regularNav href=@{ResourcesR}>
         Resources
+      <a .navBarLink .regularNav href=@{AllPostsR}>
+        Blog
+      <a .navBarLink .regularNav href=@{AllPostsR}>
+        Login
       <a .navBarLink .regularNav href="/#contact">
         Contact
   <div .logo>
