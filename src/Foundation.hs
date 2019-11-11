@@ -134,7 +134,7 @@ instance Yesod App where
     -- To add it, chain it together with the defaultMiddleware: yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
     yesodMiddleware :: ToTypedContent res => Handler res -> Handler res
-    yesodMiddleware = defaultYesodMiddleware
+    yesodMiddleware = defaultCsrfMiddleware . defaultYesodMiddleware
 
     defaultLayout :: Widget -> Handler Html
     defaultLayout widget = do
@@ -174,7 +174,7 @@ instance Yesod App where
         let navbarLeftMenuItems = [x | NavbarLeft x <- menuItems]
         let navbarRightMenuItems = [x | NavbarRight x <- menuItems]
 
-        let navbarLeftFilteredMenuItems = [x | x <- navbarLeftMenuItems, menuItemAccessCallback x]
+        let navbarLeftFilteredMenuItems = [x | x <- navbarLeftMenuItems, menuItemAccessCallback x] 
         let navbarRightFilteredMenuItems = [x | x <- navbarRightMenuItems, menuItemAccessCallback x]
 
         -- We break up the default layout into two components:
@@ -210,7 +210,6 @@ instance Yesod App where
     isAuthorized AboutR _ = return Authorized
     isAuthorized XmasR _ = return Authorized
     isAuthorized ResourcesR _ = return Authorized
-    isAuthorized NewPostR _ = return Authorized
     isAuthorized AllPostsR _ = return Authorized
     isAuthorized (ViewPostR _) _ = return Authorized
     isAuthorized (StaticR _) _ = return Authorized
@@ -218,6 +217,7 @@ instance Yesod App where
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
     isAuthorized ProfileR _ = isAuthenticated
+    isAuthorized NewPostR _ = isAuthenticated
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -291,7 +291,7 @@ instance YesodAuth App where
     logoutDest _ = HomeR
     -- Override the above two destinations when a Referer: header is present
     redirectToReferer :: App -> Bool
-    redirectToReferer _ = True
+    redirectToReferer _ = False
 
     -- Need to find the UserId for the given email address.
     authenticate creds = liftHandler $ runDB $ do
@@ -310,9 +310,24 @@ instance YesodAuth App where
 
 -- Here's all of the email-specific code
 instance YesodAuthEmail App where
+    confirmationEmailSentResponse :: Text -> AuthHandler site TypedContent
+    confirmationEmailSentResponse identifier = do
+        mr <- getMessageRender
+        selectRep $ do
+            provideJsonMessage (mr msg)
+            provideRep $ authLayout $ do
+              setTitleI Msg.ConfirmationEmailSentTitle
+              [whamlet|
+                <div .article>
+                  <h2 .centered>_{msg}|]
+      where
+        msg = Msg.ConfirmationEmailSent identifier
+
     type AuthEmailId App = UserId
 
     emailLoginHandler = myEmailLoginHandler
+    registerHandler = myRegisterHandler
+    setPasswordHandler = mySetPasswordHandler
 
     afterPasswordRoute _ = HomeR
 
@@ -389,7 +404,9 @@ unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
 --
 -- https://github.com/yesodweb/yesod/wiki/Sending-email
 -- https://github.com/yesodweb/yesod/wiki/Serve-static-files-from-a-separate-domain
-
+data ForgotPasswordForm = ForgotPasswordForm { _forgotEmail :: Text }
+data PasswordForm = PasswordForm { _passwordCurrent :: Text, _passwordNew :: Text, _passwordConfirm :: Text }
+data UserForm = UserForm { _userFormEmail :: Text }
 data UserLoginForm = UserLoginForm { _loginEmail :: Text, _loginPassword :: Text }
 myEmailLoginHandler :: YesodAuthEmail site => (Route Auth -> Route site) -> WidgetFor site ()
 myEmailLoginHandler toParent = do
@@ -443,3 +460,111 @@ myEmailLoginHandler toParent = do
       langs <- languages
       master <- getYesod
       return $ renderAuthMessage master langs msg
+
+-------------------------------------------------------------------------------
+
+myRegisterHandler :: YesodAuthEmail site => AuthHandler site Html
+myRegisterHandler = do
+  (widget, enctype) <- generateFormPost registrationForm
+  toParentRoute <- getRouteToParent
+  authLayout $ do
+    setTitleI Msg.RegisterLong
+    [whamlet|
+      <div .article>
+        <h1 #login_header .centered>_{Msg.EnterEmail}
+        <form method="post" action="@{toParentRoute registerR}" enctype=#{enctype}>
+          <div id="registerForm">
+            ^{widget}
+          <div #register_buttons>
+            <button #register_button .round_button .centered .btn>_{Msg.Register}
+    |]
+  where
+    registrationForm extra = do
+      let emailSettings = FieldSettings {
+        fsLabel = SomeMessage Msg.Email,
+        fsTooltip = Nothing,
+        fsId = Just "email",
+        fsName = Just "email",
+        fsAttrs = [("autofocus", "")]
+      }
+      (emailRes, emailView) <- mreq emailField emailSettings Nothing
+      let userRes = UserForm <$> emailRes
+      let widget = [whamlet|
+          #{extra}
+          ^{fvInput emailView}
+        |]
+      return (userRes, widget)
+
+-------------------------------------------------------------------------------
+
+mySetPasswordHandler :: YesodAuthEmail master => Bool -> AuthHandler master TypedContent
+mySetPasswordHandler needOld = do
+    messageRender <- getMessageRender
+    toParent <- getRouteToParent
+    selectRep $ do
+        provideJsonMessage $ messageRender Msg.SetPass
+        provideRep $ authLayout $ do
+            (widget, enctype) <- generateFormPost setPasswordForm
+            setTitleI Msg.SetPassTitle
+            [whamlet|
+                <div .article>
+                  <h2 .centered>_{Msg.SetPass}
+                  <form .centered method="post" action="@{toParent setpassR}" enctype=#{enctype}>
+                      ^{widget}
+            |]
+  where
+    setPasswordForm extra = do
+        (currentPasswordRes, currentPasswordView) <- mreq passwordField currentPasswordSettings Nothing
+        (newPasswordRes, newPasswordView) <- mreq passwordField newPasswordSettings Nothing
+        (confirmPasswordRes, confirmPasswordView) <- mreq passwordField confirmPasswordSettings Nothing
+
+        let passwordFormRes = PasswordForm <$> currentPasswordRes <*> newPasswordRes <*> confirmPasswordRes
+        let widget = [whamlet|
+                #{extra}
+                <table>
+                    $if needOld
+                        <tr>
+                            <th>
+                                ^{fvLabel currentPasswordView}
+                            <td>
+                                ^{fvInput currentPasswordView}
+                    <tr>
+                        <th>
+                            ^{fvLabel newPasswordView}
+                        <td>
+                            ^{fvInput newPasswordView}
+                    <tr>
+                        <th>
+                            ^{fvLabel confirmPasswordView}
+                        <td>
+                            ^{fvInput confirmPasswordView}
+                    <tr>
+                        <td colspan="2">
+                            <input type=submit value=_{Msg.SetPassTitle}>
+            |]
+
+        return (passwordFormRes, widget)
+    currentPasswordSettings =
+         FieldSettings {
+             fsLabel = SomeMessage Msg.CurrentPassword,
+             fsTooltip = Nothing,
+             fsId = Just "currentPassword",
+             fsName = Just "current",
+             fsAttrs = [("autofocus", "")]
+         }
+    newPasswordSettings =
+        FieldSettings {
+            fsLabel = SomeMessage Msg.NewPass,
+            fsTooltip = Nothing,
+            fsId = Just "newPassword",
+            fsName = Just "new",
+            fsAttrs = [("autofocus", ""), (":not", ""), ("needOld:autofocus", "")]
+        }
+    confirmPasswordSettings =
+        FieldSettings {
+            fsLabel = SomeMessage Msg.ConfirmPass,
+            fsTooltip = Nothing,
+            fsId = Just "confirmPassword",
+            fsName = Just "confirm",
+            fsAttrs = [("autofocus", "")]
+        }

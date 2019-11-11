@@ -2,7 +2,7 @@
   <div .navLinkBox>
     <div .navLinks>
       <div .navBarLink .mobile_menu>
-        <i onclick="toggleBurger()" .dropbtn .fa .fa-bars>
+        <i onclick="toggleBurger()" #hamburger .dropbtn .fa .fa-bars>
         <div .dropdown-content #myDropdown>
           <a .navBarLink .mobileNav href=@{HomeR}>
             Home
