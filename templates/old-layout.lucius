@@ -139,7 +139,7 @@ input {
 .alert {
   width: 80%;
   margin: 5% auto;
-  border: 2px solid black;
+  border: 3px solid black;
   border-radius: 5px;
   min-height: 2rem;
   font-size: 1.75rem;

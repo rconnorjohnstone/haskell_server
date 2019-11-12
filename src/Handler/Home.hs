@@ -34,7 +34,7 @@ aboutMeParams :: PreviewCardParams
 aboutMeParams = PreviewCardParams "About Me"  "I am an Aerospace Engineering Master's Student at the University of Colorado - Boulder as well as a Systems Engineer at Palski and Associates. Click the link below to learn a little bit more about my story." "/static/img/about.jpg" 0 "about" "/about"
 
 recentParams :: PreviewCardParams
-recentParams = PreviewCardParams "Recent Blog Post"  "This will be my most recent blog post" "/static/img/recent.jpg" 2 "recent" "/"
+recentParams = PreviewCardParams "Recent Blog Post"  "This will be my most recent blog post" "/static/img/recent.jpg" 2 "recent" "/posts/all"
 
 resourceParams :: PreviewCardParams
 resourceParams = PreviewCardParams "Resources" "A section for my resume, gallery, CAD examples, and whatever else I feel like uploading." "/static/img/resources.jpg" 0 "resources" "/resources"
