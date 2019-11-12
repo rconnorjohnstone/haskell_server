@@ -12,10 +12,10 @@ To go to the actual website, visit rconnorjohnstone.com or richardcjohnstone.com
 I think literally everything that was on the React site is now ported over. Don't quote me on that.
 
 ### New Stuff
-One of the "backend" type capabilities I needed was to get the email form to actually email me something. It works now.
+One of the "backend" type capabilities I needed was to get the email form to actually email me something. It works now. Also, I've got a lot of new stuff. The ability to create and view blog posts, store them to the database, and authorization through the form of an email/password combo.
 
 ### Not Yet Implemented
-I still have to add some database capabilities, and start working on a good way to do blog posts. At that point, I'll be pretty satisfied with it.
+Still needs SSL, comments, a post save/review area, and some other odds and ends
 
 ## To Build
 This is a Yesod app, so if you do want to build it (for whatever reason) it's:
