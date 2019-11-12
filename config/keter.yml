@@ -31,7 +31,7 @@ stanzas:
 
     # Enable to force Keter to redirect to https
     # Can be added to any stanza
-    requires-secure: false
+    #requires-secure: true
 
   # Static files.
   - type: static-files
@@ -51,6 +51,7 @@ stanzas:
       - host: www.richardconnorjohnstone.com
          #secure: false
          #port: 80
+    #requires-secure: true
 
   # Redirect plain domain name to www.
   - type: redirect
@@ -59,6 +60,7 @@ stanzas:
       - rconnorjohnstone.com
     actions:
       - host: www.rconnorjohnstone.com
+    #requires-secure: true
          #secure: false
          #port: 80
 
@@ -71,6 +73,7 @@ stanzas:
       - richardcjohnstone.com
     actions:
       - host: www.richardcjohnstone.com
+    #requires-secure: true
          #secure: false
          #port: 80
 
