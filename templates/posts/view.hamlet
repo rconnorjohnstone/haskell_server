@@ -3,3 +3,10 @@
 
   <article>
     #{blogPostArticle blogPost}
+
+  <div .blog_footer>
+    <a .fa .fa-fast-backward href=@{ViewPostR $ firstId}>
+    <a .fa .fa-step-backward href=@{ViewPostR $ previousId}>
+    <a #current href="">#{fromSqlKey blogPostId}
+    <a .fa .fa-step-forward href=@{ViewPostR $ nextId}>
+    <a .fa .fa-fast-forward href=@{ViewPostR $ recentId}>

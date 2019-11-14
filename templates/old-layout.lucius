@@ -14,9 +14,7 @@ h1, h2, h3 {
 h1 {
   font-size: 2.5rem;
 }
-
-h2 {
-  font-size: 2rem;
+h2 { font-size: 2rem;
 }
 
 h4, h5, h6, p, a, li {
@@ -37,6 +35,10 @@ a {
 .centered {
   margin: 0 auto;
   text-align: center;
+}
+
+.centered > table {
+  margin: 0 auto;
 }
 
 #login_header {
@@ -67,9 +69,32 @@ input {
   width: 75%;
 }
 
+#forgotPasswordForm {
+  width: 75%;
+  margin: 2rem auto;
+}
+
+#forgotPassword {
+  width: 40%
+}
+
 #login_button {
   width: 45%;
   display: inline-block;
+  margin: 2rem auto;
+}
+
+#register_button {
+  width: 45%;
+  margin: 2rem auto;
+}
+
+#forgot_pass_button {
+  margin: 2rem auto;
+}
+
+#register_buttons {
+  width: 100%;
 }
 
 .round_button {
@@ -113,4 +138,48 @@ input {
   #login_button {
     width: 75%;
   }
+}
+
+.alert {
+  width: 80%;
+  margin: 5% auto;
+  border: 3px solid black;
+  border-radius: 5px;
+  min-height: 2rem;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+.alert-info {
+  background-color: #6e84f4;
+  color: #000e59;
+}
+
+/* Common styles for all types */
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+}
+
+.bs-callout p:last-child {
+  margin-bottom: 0;
+}
+
+.bs-callout-info {
+  border-left-color: #1b809e;
+}
+
+/* Space things out */
+.bs-docs-section {
+  margin-bottom: 60px;
+}
+.bs-docs-section:last-child {
+  margin-bottom: 0;
+}
+
+#message {
+    margin-bottom: 40px;
 }

@@ -11,6 +11,7 @@ import Yesod.Text.Markdown
 
 getAllPostsR :: Handler Html
 getAllPostsR = do
+  maid <- maybeAuthId
   allPosts <- runDB $ selectList [] [Desc BlogPostId]
   homeLayout $ do
     setTitle "All Posts"

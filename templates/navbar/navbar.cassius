@@ -12,13 +12,13 @@
   padding: 0;
 
 .navBar, .empty 
-  height: 2.5rem;
+  height: 4.5rem;
   width: 100%;
 
 .navLinkBox
   display: inline-block;
   position: relative;
-  bottom: 1rem;
+  bottom: 2rem;
   width:40%;
   height: 100%;
 
@@ -31,7 +31,7 @@
   align-items: flex-end;
 
 .navBarLink 
-  font-size: 2vw;
+  font-size: 1.5vw;
 
 .activeNav 
   color:  #a644fc;
@@ -55,6 +55,10 @@
 
 .mobile_menu 
   align-self: center;
+
+#hamburger
+  display: none;
+
 
 .dropdown-content
   display: none;
@@ -100,6 +104,9 @@
     width: 100vw;
     display: none;
   
+  #hamburger
+    display: inline-block;
+
   .dropdown-content .mobileNav 
     display: block;
     font-size: 2.75rem;
