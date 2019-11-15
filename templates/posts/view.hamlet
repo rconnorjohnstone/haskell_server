@@ -1,9 +1,10 @@
 <div .article>
+
+  <img .cover src=#{blogPostCoverName blogPost} />
+
   <h1>#{blogPostTitle blogPost}
 
   <p> #{show $ blogPostDate blogPost}
-
-  <img src=#{blogPostCoverName blogPost} />
 
   <article>
     #{blogPostArticle blogPost}

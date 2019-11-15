@@ -7,6 +7,7 @@ import Layouts.HomeLayout
 import Import
 import Text.Markdown
 import Yesod.Text.Markdown
+import Yesod.Form.Types ()
 import Database.Persist.Sql
 
 uploadDirectory :: FilePath
@@ -17,7 +18,7 @@ uploadDirectory = "static/img"
 draftForm :: BlogDraft -> Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Markdown), Widget)
 draftForm blogDraft = renderDivs $ (,,,) 
     <$> areq textField "Title" (Just (blogDraftTitle blogDraft))
-    <*> fileAFormReq "Image File"
+    <*> fileAFormReq "Cover Image"
     <*> lift (liftIO getCurrentTime)
     <*> areq markdownField "Article" (Just (blogDraftArticle blogDraft))
 
@@ -59,6 +60,11 @@ postViewDraftR blogDraftId = do
       let blogDraft = BlogDraft title imageLoc date article
       runDB $ replace blogDraftId $ blogDraft
       redirect $ ViewDraftR blogDraftId
+    (FormSuccess (title, image, date, article), Just "preview") -> do
+      imageLoc <- writeToServer image
+      let blogDraft = BlogDraft title imageLoc date article
+      runDB $ replace blogDraftId $ blogDraft
+      redirect $ PreviewDraftR blogDraftId
     (FormSuccess (title, image, date, article), Just "delete") -> do
       runDB $ delete blogDraftId
       redirect $ AllPostsR
