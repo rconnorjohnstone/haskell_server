@@ -1,0 +1,8 @@
+<div .article>
+  <h1> View All Drafts
+
+  <ul>
+    $forall Entity id post <- allPosts 
+      <h4>
+        <li>
+          <a href=@{ViewDraftR id}>#{blogDraftTitle post}

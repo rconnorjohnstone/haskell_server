@@ -219,6 +219,8 @@ instance Yesod App where
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
     isAuthorized ProfileR _ = isAuthenticated
+    isAuthorized AllDraftsR _ = return Authorized
+    isAuthorized (ViewDraftR _) _ = isAuthenticated
     isAuthorized NewPostR _ = isAuthenticated
 
     -- This function creates static content files in the static folder
