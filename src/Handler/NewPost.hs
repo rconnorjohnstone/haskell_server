@@ -5,13 +5,19 @@ module Handler.NewPost where
 
 import Layouts.HomeLayout
 import Import 
+import Text.Markdown
 import Yesod.Text.Markdown
+
+uploadDirectory :: FilePath
+uploadDirectory = "static/img"
 
 -------------------------------------------------------------------------------
 
-blogPostForm :: Html -> MForm Handler (FormResult BlogDraft, Widget)
-blogPostForm = renderDivs $ BlogDraft
+blogPostForm :: Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Markdown), Widget)
+blogPostForm = renderDivs $ (,,,)
     <$> areq textField "Title" Nothing
+    <*> fileAFormReq "Cover Image"
+    <*> lift (liftIO getCurrentTime)
     <*> areq markdownField "Article" Nothing
     
 -------------------------------------------------------------------------------
@@ -30,7 +36,19 @@ postNewPostR :: Handler Html
 postNewPostR = do
   ((res, blogDraftWidget), enctype) <- runFormPost blogPostForm
   case res of 
-    FormSuccess blogDraft -> do
+    FormSuccess (title, image, date, article) -> do
+      imageLocation <- writeToServer image
+      let blogDraft = BlogDraft title imageLocation date article
       blogDraftId <- runDB $ insert blogDraft
       redirect $ AllPostsR
     _ -> getNewPostR
+
+writeToServer :: FileInfo -> Handler FilePath
+writeToServer file = do
+    let filename = unpack $ fileName file
+        path = imageFilePath filename
+    liftIO $ fileMove file path
+    return path
+
+imageFilePath :: String -> FilePath
+imageFilePath f = uploadDirectory </> f

@@ -50,6 +50,7 @@ import Handler.Resources
 import Handler.NewPost
 import Handler.ViewPost
 import Handler.ViewDraft
+import Handler.PreviewDraft
 import Handler.AllPosts
 import Handler.AllDrafts
 

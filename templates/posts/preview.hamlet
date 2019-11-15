@@ -1,0 +1,11 @@
+<div .article>
+
+  <img .cover src=#{blogDraftCoverName blogDraft} />
+
+  <h1>#{blogDraftTitle blogDraft}
+
+  <p .date> #{formatTime defaultTimeLocale "%D %R" (blogDraftDate blogDraft)}
+
+  <article>
+    #{blogDraftArticle blogDraft}
+

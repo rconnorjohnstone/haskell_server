@@ -20,7 +20,11 @@ Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived
     deriving Show
 BlogPost
      title Text
+     coverName String
+     date UTCTime
      article Markdown
 BlogDraft
      title Text
+     coverName String
+     date UTCTime
      article Markdown
