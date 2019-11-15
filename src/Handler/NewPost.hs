@@ -9,8 +9,8 @@ import Yesod.Text.Markdown
 
 -------------------------------------------------------------------------------
 
-blogPostForm :: Html -> MForm Handler (FormResult BlogPost, Widget)
-blogPostForm = renderDivs $ BlogPost
+blogPostForm :: Html -> MForm Handler (FormResult BlogDraft, Widget)
+blogPostForm = renderDivs $ BlogDraft
     <$> areq textField "Title" Nothing
     <*> areq markdownField "Article" Nothing
     
@@ -28,9 +28,9 @@ getNewPostR = do
 
 postNewPostR :: Handler Html
 postNewPostR = do
-  ((res, blogPostWidget), enctype) <- runFormPost blogPostForm
+  ((res, blogDraftWidget), enctype) <- runFormPost blogPostForm
   case res of 
-    FormSuccess blogPost -> do
-      blogPostId <- runDB $ insert blogPost
-      redirect $ ViewPostR blogPostId
+    FormSuccess blogDraft -> do
+      blogDraftId <- runDB $ insert blogDraft
+      redirect $ AllPostsR
     _ -> getNewPostR

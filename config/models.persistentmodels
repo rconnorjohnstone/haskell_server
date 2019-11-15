@@ -21,3 +21,6 @@ Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived
 BlogPost
      title Text
      article Markdown
+BlogDraft
+     title Text
+     article Markdown

@@ -13,6 +13,7 @@ import Database.Persist.Sql
 getViewPostR :: BlogPostId -> Handler Html
 getViewPostR blogPostId = do
   maid <- maybeAuthId
+  blogPost <- runDB $ get404 blogPostId
   recentBlog <- runDB $ selectList [] [Desc BlogPostId, LimitTo 1]
   let Entity recentId _ = Prelude.head recentBlog
   firstBlog <- runDB $ selectList [] [Asc BlogPostId, LimitTo 1]

@@ -1,0 +1,12 @@
+<div .article>
+  <form method=post action=@{ViewDraftR blogDraftId} enctype=#{enctype}>
+    ^{blogDraftWidget}
+    <button .round_button name=action value=save> Save
+    <button .round_button name=action value=publish> Publish
+
+  <div .blog_footer>
+    <a .fa .fa-fast-backward href=@{ViewDraftR $ firstId}>
+    <a .fa .fa-step-backward href=@{ViewDraftR $ previousId}>
+    <a #current href="">#{fromSqlKey blogDraftId}
+    <a .fa .fa-step-forward href=@{ViewDraftR $ nextId}>
+    <a .fa .fa-fast-forward href=@{ViewDraftR $ recentId}>
