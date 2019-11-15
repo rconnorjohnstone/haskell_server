@@ -48,9 +48,9 @@ postViewDraftR blogDraftId = do
   ((res, widget), enctype) <- runFormPost (draftForm foundBlogDraft)
   action <- lookupPostParam "action"
   case (res, action) of 
-    (FormSuccess blogDraft, Just "save") -> do
-      blogDraftNewId <- runDB $ insert (BlogDraft (blogPostTitle blogDraft) (blogPostArticle blogDraft))
-      redirect $ ViewDraftR blogDraftNewId
+    (FormSuccess blogPost, Just "save") -> do
+      runDB $ replace blogDraftId $ BlogDraft (blogPostTitle blogPost) (blogPostArticle blogPost)
+      redirect $ ViewDraftR blogDraftId
     (FormSuccess blogPost, Just "publish") -> do
       blogPostId <- runDB $ insert blogPost
       redirect $ ViewPostR blogPostId
