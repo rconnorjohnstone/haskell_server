@@ -51,6 +51,9 @@ postViewDraftR blogDraftId = do
     (FormSuccess blogPost, Just "save") -> do
       runDB $ replace blogDraftId $ BlogDraft (blogPostTitle blogPost) (blogPostArticle blogPost)
       redirect $ ViewDraftR blogDraftId
+    (FormSuccess blogPost, Just "delete") -> do
+      runDB $ delete blogDraftId
+      redirect $ AllPostsR
     (FormSuccess blogPost, Just "publish") -> do
       blogPostId <- runDB $ insert blogPost
       redirect $ ViewPostR blogPostId
