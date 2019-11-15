@@ -22,6 +22,7 @@ import System.Environment
 import qualified Yesod.Auth.Message       as Msg
 import           Control.Applicative      ((<$>), (<*>))
 
+import           Data.Word
 import           Control.Monad            (join)
 import           Control.Monad.Logger     (runNoLoggingT)
 import           Data.Maybe               (isJust)
@@ -222,6 +223,10 @@ instance Yesod App where
     isAuthorized AllDraftsR _ = return Authorized
     isAuthorized (ViewDraftR _) _ = isAuthenticated
     isAuthorized NewPostR _ = isAuthenticated
+
+    maximumContentLength _ (Just (ViewDraftR _)) = Just (2 * 1024 * 1024 * 1024) -- 2 gigabytes
+    maximumContentLength _ (Just (NewPostR)) = Just (2 * 1024 * 1024 * 1024) -- 2 gigabytes
+    maximumContentLength _ _ = Just (2 * 1024 * 1024) -- 2 megabytes
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
