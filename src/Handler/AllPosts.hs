@@ -5,7 +5,6 @@ module Handler.AllPosts where
 
 import Layouts.HomeLayout
 import Import 
-import Yesod.Text.Markdown
 
 -------------------------------------------------------------------------------
 
