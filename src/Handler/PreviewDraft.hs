@@ -1,20 +1,22 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 
-module Handler.AllDrafts where
+module Handler.PreviewDraft where
 
 import Layouts.HomeLayout
-import Import 
+import Import
 import Yesod.Text.Markdown
+import Data.Time.Format
+import Database.Persist.Sql
 
 -------------------------------------------------------------------------------
 
-getAllDraftsR :: Handler Html
-getAllDraftsR = do
+getPreviewDraftR :: BlogDraftId -> Handler Html
+getPreviewDraftR blogDraftId = do
   maid <- maybeAuthId
-  allPosts <- runDB $ selectList [] [Desc BlogDraftId]
+  blogDraft <- runDB $ get404 blogDraftId
   homeLayout $ do
-    setTitle "All Drafts"
+    setTitle (toHtml $ blogDraftTitle blogDraft)
     $(widgetFile "navbar/navbar")
-    $(widgetFile "posts/all_drafts")
+    $(widgetFile "posts/preview")
     $(widgetFile "footer/footer")

@@ -1,6 +1,9 @@
 .article
   font-size: 1.5rem;
 
+.cover
+  width: 100%;
+
 .blog_footer
   width: 30%;
   display: flex;
