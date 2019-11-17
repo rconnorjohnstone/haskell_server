@@ -5,7 +5,6 @@ module Handler.NewPost where
 
 import Layouts.HomeLayout
 import Import 
-import CMarkGFM
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"
@@ -33,21 +32,21 @@ getNewPostR = do
 
 postNewPostR :: Handler Html
 postNewPostR = do
-  ((res, blogDraftWidget), enctype) <- runFormPost blogPostForm
+  ((res, _), _) <- runFormPost blogPostForm
   case res of 
     FormSuccess (title, image, date, article) -> do
       imageLocation <- writeToServer image
       let blogDraft = BlogDraft title imageLocation date article
-      blogDraftId <- runDB $ insert blogDraft
+      _ <- runDB $ insert blogDraft
       redirect $ AllDraftsR
     _ -> getNewPostR
 
 writeToServer :: FileInfo -> Handler FilePath
 writeToServer file = do
     let filename = unpack $ fileName file
-        path = imageFilePath filename
-    liftIO $ fileMove file path
-    return path
+        imagePath = imageFilePath filename
+    liftIO $ fileMove file imagePath
+    return imagePath
 
 imageFilePath :: String -> FilePath
 imageFilePath f = uploadDirectory </> f

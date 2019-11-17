@@ -94,7 +94,7 @@ getHomeR = do
 
 postContactR :: Handler Html
 postContactR = do
-  ((result, contactWidget), enctype) <- runFormPost contacterForm
+  ((result, _), _) <- runFormPost contacterForm
   case result of
     FormSuccess contacter -> do
       let body = (name contacter) `append` 

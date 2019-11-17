@@ -7,7 +7,6 @@
 
 module Handler.Xmas where
 
-import Text.Hamlet (hamletFile)
 import Layouts.HomeLayout
 import Import 
 

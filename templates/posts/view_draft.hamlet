@@ -1,4 +1,5 @@
 <div .article>
+
   <form method=post action=@{ViewDraftR blogDraftId} enctype=#{enctype}>
     ^{blogDraftWidget}
     <div .draft_view_buttons>

@@ -5,11 +5,9 @@ module Handler.PreviewDraft where
 
 import Layouts.HomeLayout
 import Import
-import Data.Time.Format
-import Database.Persist.Sql
-import CMarkGFM
 import Text.HTML.SanitizeXSS
 import Text.Blaze.Html
+import CMarkGFM
 
 -------------------------------------------------------------------------------
 

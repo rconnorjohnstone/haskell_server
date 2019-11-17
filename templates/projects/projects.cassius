@@ -11,6 +11,8 @@
 .projects_header 
   height: 20vh;
 
+.projects_header h2
+  margin: 2rem 0;
 
 .projects_grid 
   margin: 0 auto;

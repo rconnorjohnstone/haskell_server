@@ -9,7 +9,7 @@
         Resources
       <a .navBarLink .regularNav href=@{AllPostsR}>
         Blog
-      $maybe navMaid <- maid
+      $maybe _ <- maid
         <a .navBarLink .regularNav href=@{AuthR LogoutR}>
           Logout
       $nothing
@@ -28,7 +28,7 @@
             Resources
           <a .navBarLink .mobileNav href=@{AllPostsR}>
             Blog
-          $maybe navMaid <- maid
+          $maybe _ <- maid
             <a .navBarLink .mobileNav href=@{AuthR LogoutR}>
               Logout
           $nothing
