@@ -6,6 +6,7 @@ module Handler.EditPost where
 import Layouts.HomeLayout
 import Import
 import Yesod.Form.Types ()
+import Database.Persist.Sql (fromSqlKey)
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"

@@ -5,6 +5,7 @@ module Handler.NewPost where
 
 import Layouts.HomeLayout
 import Import 
+import Database.Persist.Sql (fromSqlKey)
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"

@@ -8,6 +8,7 @@
 module Handler.Xmas where
 
 import Layouts.HomeLayout
+import Database.Persist.Sql
 import Import 
 
 -------------------------------------------------------------------------------

@@ -6,6 +6,7 @@ module Handler.AllPosts where
 import Layouts.HomeLayout
 import Import 
 import Handler.Home
+import Database.Persist.Sql (fromSqlKey)
 
 -------------------------------------------------------------------------------
 

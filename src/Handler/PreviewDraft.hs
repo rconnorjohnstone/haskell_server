@@ -7,6 +7,7 @@ import Layouts.HomeLayout
 import Import
 import Text.HTML.SanitizeXSS
 import Text.Blaze.Html
+import Database.Persist.Sql (fromSqlKey)
 import CMarkGFM
 
 -------------------------------------------------------------------------------

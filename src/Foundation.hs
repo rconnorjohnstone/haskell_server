@@ -28,7 +28,7 @@ import Database.Persist.Sqlite
 import Yesod
 import Yesod.Auth
 import Import.NoFoundation hiding (unpack)
-import Database.Persist.Sql (ConnectionPool, runSqlPool)
+import Database.Persist.Sql (ConnectionPool, runSqlPool, fromSqlKey)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
 import Control.Monad.Logger (LogSource)

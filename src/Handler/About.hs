@@ -4,6 +4,7 @@
 module Handler.About where
 
 import Import 
+import Database.Persist.Sql (fromSqlKey)
 import Layouts.HomeLayout
 
 -------------------------------------------------------------------------------
