@@ -223,10 +223,12 @@ instance Yesod App where
     isAuthorized ProfileR _ = isAuthenticated
     isAuthorized AllDraftsR _ = return Authorized
     isAuthorized (ViewDraftR _) _ = isAuthenticated
+    isAuthorized (EditPostR _) _ = isAuthenticated
     isAuthorized (PreviewDraftR _) _ = isAuthenticated
     isAuthorized NewPostR _ = isAuthenticated
 
     maximumContentLength _ (Just (ViewDraftR _)) = Just (2 * 1024 * 1024 * 1024) -- 2 gigabytes
+    maximumContentLength _ (Just (EditPostR _)) = Just (2 * 1024 * 1024 * 1024) -- 2 gigabytes
     maximumContentLength _ (Just (NewPostR)) = Just (2 * 1024 * 1024 * 1024) -- 2 gigabytes
     maximumContentLength _ _ = Just (2 * 1024 * 1024) -- 2 megabytes
 
