@@ -1,9 +1,12 @@
 <div .article>
 
-  <img .cover src=#{blogPostCoverName blogPost} />
+  <img .cover-pic src=#{blogPostCoverName blogPost} />
 
-  <h1>#{blogPostTitle blogPost}
+  <div .empty .cover-empty>
+    <div .header_box>
+      <h1 .title-header>#{blogPostTitle blogPost}
 
+  <p .date> Richard Connor Johnstone
   <p .date> #{formatTime defaultTimeLocale "%D" (blogPostDate blogPost)}
 
   <article>

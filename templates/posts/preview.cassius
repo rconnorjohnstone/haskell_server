@@ -1,6 +1,9 @@
 .article
   font-size: 1.3rem;
 
+a
+  text-decoration: underline; !important
+
 .date
   font-size: 1.25rem;
   color: Gray;
@@ -9,5 +12,5 @@
 
 @media only screen and (orientation: portrait)
   .article
-    .font-size: 1.1rem;
+    .font-size: 0.9rem;
 

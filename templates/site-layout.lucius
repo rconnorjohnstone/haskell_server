@@ -41,7 +41,7 @@ article {
   width: 75%;
   min-width: 500px;
   margin: -1%  auto;
-  line-height: 1.75;
+  line-height: 1.5;
 }
 
 .title-header {
@@ -49,7 +49,11 @@ article {
   -webkit-text-stroke-color: black;
   font-size: 4rem;
   vertical-align: bottom;
-  line-height: 80vw;
+  line-height: 1.25;
+}
+
+.header_box {
+  margin: auto auto .2rem .2rem;
 }
 
 .bottom_span {
@@ -61,6 +65,9 @@ article {
   position: relative;
   height: 42.1875vw;
   vertical-align: bottom;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
 .cover-pic {
@@ -107,9 +114,9 @@ article {
   .article {
     width: 90%;
     min-width: 100px;
+    line-height: 1.25;
   }
 
-  
   .cover-pic {
     width: 90vw;
     height: 50.625vw;
@@ -120,7 +127,7 @@ article {
   }
 
   .title-header {
-    line-height: 95vw;
+    font-size: 2.75rem;
   }
 
 }

@@ -2,17 +2,9 @@
 
   <div .footer_links>
 
-    <a href="https://www.github.com/rconnorjohnstone" >
-      <p>
-        <i .fa .fa-github>
-    <a href="https://www.instagram.com/r_connor_johnstone/" >
-      <p>
-        <i .fa .fa-instagram>
-    <a href="https://www.linkedin.com/in/rconnorjohnstone/" >
-      <p>
-        <i .fa .fa-linkedin>
-    <a href="mailto:connor@richardconnorjohnstone.com" >
-      <p>
-        <i .fa .fa-envelope-open>
+    <a .fa .fa-github href="https://www.github.com/rconnorjohnstone" >
+    <a .fa .fa-instagram href="https://www.instagram.com/r_connor_johnstone/" >
+    <a .fa .fa-linkedin href="https://www.linkedin.com/in/rconnorjohnstone/" >
+    <a .fa .fa-envelope-open href="mailto:connor@richardconnorjohnstone.com" >
 
   <p> &copy; Richard Connor Johnstone
