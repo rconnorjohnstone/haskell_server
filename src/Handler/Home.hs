@@ -11,6 +11,8 @@ import System.Environment
 import Import hiding (authenticate)
 import Layouts.HomeLayout
 import Database.Persist.Sql
+import Hakyll.Web.Html
+import CMarkGFM
 
 -------------------------------------------------------------------------------
 
@@ -37,7 +39,7 @@ aboutMeParams = PreviewCardParams "About Me"  "I am an Aerospace Engineering Mas
 recentParams :: BlogPost -> BlogPostId -> PreviewCardParams
 recentParams recentPost blogPostId = PreviewCardParams 
                (blogPostTitle recentPost) 
-               ((pack $ Prelude.take 450 $ unpack $ unTextarea $ (blogPostArticle recentPost)) `append` "...")
+               ((pack $ stripTags $ Prelude.take 450 $ unpack $ commonmarkToHtml [] [] $ unTextarea $ (blogPostArticle recentPost)) `append` "...")
                (pack $ blogPostCoverName recentPost) 
                True 
                "recent" 

@@ -39,6 +39,13 @@ packages:
       sha256: 4ef36ec31595199c8a18a9d33749aee3802b6ec056ec99effeb528262db9fd62
   original:
     hackage: socks-0.5.6
+- completed:
+    hackage: hakyll-4.13.0.1@sha256:0f27d74feaedc96648ec5377ecec2b35dd677516c9667d179462a350f2075628,8817
+    pantry-tree:
+      size: 7841
+      sha256: 4a4409d287ee3daabb0141e3ebd3d2e88ead7382ba5cc582733907b4a938c4a8
+  original:
+    hackage: hakyll-4.13.0.1
 snapshots:
 - completed:
     size: 524130
