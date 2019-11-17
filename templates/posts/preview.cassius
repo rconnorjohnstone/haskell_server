@@ -1,13 +1,11 @@
 .article
-  font-size: 1.5rem;
-
-.cover
-  width: 100%;
+  font-size: 1.3rem;
 
 .date
   font-size: 1.25rem;
   color: Gray;
   margin: 0;
+  line-height: 1.1;
 
 @media only screen and (orientation: portrait)
   .article

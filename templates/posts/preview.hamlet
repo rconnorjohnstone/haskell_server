@@ -1,9 +1,11 @@
 <div .article>
 
-  <img .cover src=#{blogDraftCoverName blogDraft} />
+  <img .cover-pic src=#{blogDraftCoverName blogDraft} />
 
-  <h1>#{blogDraftTitle blogDraft}
+  <div .empty .cover-empty>
+    <h1 .title-header>#{blogDraftTitle blogDraft}
 
+  <p .date> Richard Connor Johnstone
   <p .date> #{formatTime defaultTimeLocale "%D" (blogDraftDate blogDraft)}
 
   <article>

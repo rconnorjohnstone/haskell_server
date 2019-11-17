@@ -1,6 +1,22 @@
 <div .navBar>
   <div .navLinkBox>
     <div .navLinks>
+      <a .navBarLink .regularNav href=@{HomeR}>
+        Home
+      <a .navBarLink .regularNav href=@{AboutR}>
+        About
+      <a .navBarLink .regularNav href=@{ResourcesR}>
+        Resources
+      <a .navBarLink .regularNav href=@{AllPostsR}>
+        Blog
+      $maybe navMaid <- maid
+        <a .navBarLink .regularNav href=@{AuthR LogoutR}>
+          Logout
+      $nothing
+        <a .navBarLink .regularNav href=@{AuthR LoginR}>
+          Login
+      <a .navBarLink .regularNav href="/#contact">
+        Contact
       <div .navBarLink .mobile_menu>
         <i onclick="toggleBurger()" #hamburger .dropbtn .fa .fa-bars>
         <div .dropdown-content #myDropdown>
@@ -20,22 +36,6 @@
               Login
           <a .navBarLink .mobileNav href="/#contact">
             Contact
-      <a .navBarLink .regularNav href=@{HomeR}>
-        Home
-      <a .navBarLink .regularNav href=@{AboutR}>
-        About
-      <a .navBarLink .regularNav href=@{ResourcesR}>
-        Resources
-      <a .navBarLink .regularNav href=@{AllPostsR}>
-        Blog
-      $maybe navMaid <- maid
-        <a .navBarLink .regularNav href=@{AuthR LogoutR}>
-          Logout
-      $nothing
-        <a .navBarLink .regularNav href=@{AuthR LoginR}>
-          Login
-      <a .navBarLink .regularNav href="/#contact">
-        Contact
   <div .logo>
     <p>
       Richard <strong>Connor</strong> Johnstone
