@@ -36,12 +36,12 @@ data Contacter = Contacter {name :: Text,
 aboutMeParams :: PreviewCardParams
 aboutMeParams = PreviewCardParams "About Me"  "I am an Aerospace Engineering Master's Student at the University of Colorado - Boulder as well as a Systems Engineer at Palski and Associates. Click the link below to learn a little bit more about my story." "/static/img/about.jpg" False "about" "/about"
 
-recentParams :: BlogPost -> BlogPostId -> PreviewCardParams
-recentParams recentPost blogPostId = PreviewCardParams 
+recentParams :: BlogPost -> BlogPostId -> Bool -> PreviewCardParams
+recentParams recentPost blogPostId flipped = PreviewCardParams 
                (blogPostTitle recentPost) 
                ((pack $ stripTags $ Prelude.take 450 $ unpack $ commonmarkToHtml [] [] $ unTextarea $ (blogPostArticle recentPost)) `append` "...")
                (pack $ blogPostCoverName recentPost) 
-               True 
+               flipped 
                "recent" 
                ("/posts/" `append` (pack $ show $ fromSqlKey blogPostId))
 
@@ -86,7 +86,7 @@ getHomeR = do
     setTitle "Richard Connor Johnstone"
     $(widgetFile "banner/banner")
     previewCard aboutMeParams
-    previewCard (recentParams recentBlog recentId)
+    previewCard (recentParams recentBlog recentId True)
     previewCard resourceParams
     projects [imdProject, attProject, wmsProject]
     $(widgetFile "contact/contact")
