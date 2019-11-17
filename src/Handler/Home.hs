@@ -57,7 +57,7 @@ attProject :: ProjectCard
 attProject = ProjectCard "Attitude and Kinematics Module" "/static/img/att.jpg"  "https://www.github.com/rconnorjohnstone/Attitude-Control-Module"
 
 wmsProject :: ProjectCard
-wmsProject = ProjectCard "Interplanetary Mission Design Toolbox" "/static/img/wms.jpg"  "https://www.github.com/rconnorjohnstone/WheresMySat"
+wmsProject = ProjectCard "Where's My Satellite?" "/static/img/wms.jpg"  "https://www.github.com/rconnorjohnstone/WheresMySat"
 
 -------------------------------------------------------------------------------
 
