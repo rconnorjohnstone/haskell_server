@@ -1,13 +1,16 @@
 <div .article>
 
-  <img .cover src=#{blogPostCoverName blogPost} />
+  <img .cover-pic src=#{blogPostCoverName blogPost} />
 
-  <h1>#{blogPostTitle blogPost}
+  <div .empty .cover-empty>
+    <div .header_box>
+      <h1 .title-header>#{blogPostTitle blogPost}
 
-  <p> #{show $ blogPostDate blogPost}
+  <p .date> Richard Connor Johnstone
+  <p .date> #{formatTime defaultTimeLocale "%D" (blogPostDate blogPost)}
 
   <article>
-    #{blogPostArticle blogPost}
+    #{preEscapedToHtml articleHtml}
 
   <div .blog_footer>
     <a .fa .fa-fast-backward href=@{ViewPostR $ firstId}>

@@ -1,26 +1,27 @@
 .navBar 
-  display: inline-block;
-  /*flex-direction: row;*/
   background-color: black;
-  /*justify-content: space-between; */
-  /*align-items: flex-end;*/
   position: fixed;
-  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+
+.empty
+  position: static;
+
+.navBar, .empty 
   right: 0;
   left: 0;
   top: 0;
   padding: 0;
-
-.navBar, .empty 
-  height: 4.5rem;
+  z-index: 1000;
+  height: 3.7rem;
   width: 100%;
 
 .navLinkBox
   display: inline-block;
-  position: relative;
-  bottom: 2rem;
-  width:40%;
-  height: 100%;
+  width: 45%;
+  height: 85%;
+  margin: auto 2vw;
 
 .navLinks 
   display: flex;
@@ -39,17 +40,17 @@
 .logo 
   box-sizing: border-box;
   display: inline-block;
-  width:58%;
+  width: 48%;
   color: white;
-  padding: 0.2rem 0.5rem;
   text-align: right;
-  height: 100%;
+  height: 3.5vw;
+  vertical-align: bottom;
+  margin-bottom: 0.5rem;
 
 .logo p
   margin-block-start: 0;
   margin-block-end: 0;
-  font-size: 3.5vw;
-  line-height: 100%;
+  font-size: 3.5vw; 
   height: 100%;
   vertical-align: bottom;
 
@@ -57,8 +58,7 @@
   align-self: center;
 
 #hamburger
-  display: none;
-
+  display: hidden;
 
 .dropdown-content
   display: none;
@@ -90,9 +90,10 @@
   
   .logo 
     min-width: 85vw;
+    height: 2.2rem;
 
   .logo p
-    font-size: 1.625rem;
+    font-size: 2.2rem;
   
   .fa-bars:hover 
     color: green;

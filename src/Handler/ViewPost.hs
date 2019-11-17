@@ -5,8 +5,10 @@ module Handler.ViewPost where
 
 import Layouts.HomeLayout
 import Import
-import Yesod.Text.Markdown
 import Database.Persist.Sql
+import CMarkGFM
+import Text.HTML.SanitizeXSS
+import Text.Blaze.Html
 
 -------------------------------------------------------------------------------
 
@@ -29,6 +31,7 @@ getViewPostR blogPostId = do
   blogPost <- runDB $ get404 blogPostId
   homeLayout $ do
     setTitle (toHtml $ blogPostTitle blogPost)
+    let articleHtml = sanitize $ commonmarkToHtml [] [] (unTextarea $ blogPostArticle blogPost)
     $(widgetFile "navbar/navbar")
     $(widgetFile "posts/view")
     $(widgetFile "footer/footer")

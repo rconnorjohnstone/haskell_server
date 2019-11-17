@@ -22,9 +22,9 @@ BlogPost
      title Text
      coverName String
      date UTCTime
-     article Markdown
+     article Textarea
 BlogDraft
      title Text
      coverName String
      date UTCTime
-     article Markdown
+     article Textarea

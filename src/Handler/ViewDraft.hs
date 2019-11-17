@@ -5,22 +5,21 @@ module Handler.ViewDraft where
 
 import Layouts.HomeLayout
 import Import
-import Text.Markdown
-import Yesod.Text.Markdown
 import Yesod.Form.Types ()
 import Database.Persist.Sql
+import CMarkGFM
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"
 
 -------------------------------------------------------------------------------
 
-draftForm :: BlogDraft -> Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Markdown), Widget)
+draftForm :: BlogDraft -> Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Textarea), Widget)
 draftForm blogDraft = renderDivs $ (,,,) 
     <$> areq textField "Title" (Just (blogDraftTitle blogDraft))
     <*> fileAFormReq "Cover Image"
     <*> lift (liftIO getCurrentTime)
-    <*> areq markdownField "Article" (Just (blogDraftArticle blogDraft))
+    <*> areq textareaField "Article" (Just (blogDraftArticle blogDraft))
 
 -------------------------------------------------------------------------------
 

@@ -5,20 +5,19 @@ module Handler.NewPost where
 
 import Layouts.HomeLayout
 import Import 
-import Text.Markdown
-import Yesod.Text.Markdown
+import CMarkGFM
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"
 
 -------------------------------------------------------------------------------
 
-blogPostForm :: Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Markdown), Widget)
+blogPostForm :: Html -> MForm Handler (FormResult (Text, FileInfo, UTCTime, Textarea), Widget)
 blogPostForm = renderDivs $ (,,,)
     <$> areq textField "Title" Nothing
     <*> fileAFormReq "Cover Image"
     <*> lift (liftIO getCurrentTime)
-    <*> areq markdownField "Article" Nothing
+    <*> areq textareaField "Article" Nothing
     
 -------------------------------------------------------------------------------
 
@@ -40,7 +39,7 @@ postNewPostR = do
       imageLocation <- writeToServer image
       let blogDraft = BlogDraft title imageLocation date article
       blogDraftId <- runDB $ insert blogDraft
-      redirect $ AllPostsR
+      redirect $ AllDraftsR
     _ -> getNewPostR
 
 writeToServer :: FileInfo -> Handler FilePath

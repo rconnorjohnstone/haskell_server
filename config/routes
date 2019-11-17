@@ -18,6 +18,7 @@
 !/drafts/#BlogDraftId           ViewDraftR    GET POST
 !/drafts/preview/#BlogDraftId   PreviewDraftR GET
 /drafts/all                     AllDraftsR    GET
+/posts/edit/#BlogPostId         EditPostR     GET POST
 
 /comments                       CommentR      POST
 

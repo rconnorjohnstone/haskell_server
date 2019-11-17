@@ -1,11 +1,14 @@
 <div .article>
 
-  <img .cover src=#{blogDraftCoverName blogDraft} />
+  <img .cover-pic src=#{blogDraftCoverName blogDraft} />
 
-  <h1>#{blogDraftTitle blogDraft}
+  <div .empty .cover-empty>
+    <div .header_box>
+      <h1 .title-header>#{blogDraftTitle blogDraft}
 
-  <p .date> #{formatTime defaultTimeLocale "%D %R" (blogDraftDate blogDraft)}
+  <p .date> Richard Connor Johnstone
+  <p .date> #{formatTime defaultTimeLocale "%D" (blogDraftDate blogDraft)}
 
   <article>
-    #{blogDraftArticle blogDraft}
+    #{preEscapedToHtml articleHtml}
 
