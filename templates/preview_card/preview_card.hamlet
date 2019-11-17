@@ -9,13 +9,13 @@
 
   $if previewOffset params
     <div .card_content>
-      <h2> #{previewTitle params}
+      <h2> <a href=#{previewR params}> #{previewTitle params}
       <p> #{previewText params}
       <div .card_links>
         <a .round_button href=#{previewR params}> Learn More
   $else
     <div .card_content .offsetSmall>
-      <h2> #{previewTitle params}
+      <h2> <a href=#{previewR params}> #{previewTitle params}
       <p> #{previewText params}
       <div .card_links>
         <a .round_button href=#{previewR params}> Learn More

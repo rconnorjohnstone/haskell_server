@@ -1,8 +1,2 @@
 <div .article>
   <h1> View All Posts
-
-  <ul>
-    $forall Entity id post <- allPosts 
-      <h4>
-        <li>
-          <a href=@{ViewPostR id}>#{blogPostTitle post}

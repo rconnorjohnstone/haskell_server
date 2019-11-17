@@ -36,12 +36,12 @@ aboutMeParams = PreviewCardParams "About Me"  "I am an Aerospace Engineering Mas
 
 recentParams :: BlogPost -> BlogPostId -> PreviewCardParams
 recentParams recentPost blogPostId = PreviewCardParams 
-                                       (blogPostTitle recentPost) 
-                                       (pack $ Prelude.take 450 $ unpack $ unTextarea $ (blogPostArticle recentPost))
-                                       (pack $ blogPostCoverName recentPost) 
-                                       True 
-                                       "recent" 
-                                       ("/posts/" `append` (pack $ show $ fromSqlKey blogPostId))
+               (blogPostTitle recentPost) 
+               ((pack $ Prelude.take 450 $ unpack $ unTextarea $ (blogPostArticle recentPost)) `append` "...")
+               (pack $ blogPostCoverName recentPost) 
+               True 
+               "recent" 
+               ("/posts/" `append` (pack $ show $ fromSqlKey blogPostId))
 
 resourceParams :: PreviewCardParams
 resourceParams = PreviewCardParams "Resources" "A section for my resume, gallery, CAD examples, and whatever else I feel like uploading." "/static/img/resources.jpg" False "resources" "/resources"
