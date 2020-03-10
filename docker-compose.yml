@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  base:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: "base"
+  main:
+    build:
+      context: ./main
+      dockerfile: Dockerfile
+    image: "main"
+    networks:
+      - main
+    ports:
+      - 80:8080
+    volumes:
+      - main/app:/main/app
+      - main/assets:/main/assets
+      - main/config:/main/config
+      - main/Layouts:/main/Layouts
+      - main/src:/main/src
+      - main/static:/main/static
+      - main/templates:/main/templates
+      - main/test:/main/test
+      - main/test:/main/test
+      - main/entrypoint:/bin/entrypoint
+    entrypoint: ["entrypoint"]
+
+volumes:
+  database-volume:
+
+networks:
+  main:
