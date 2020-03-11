@@ -15,3 +15,6 @@ EXPOSE 3000 3443
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 
+RUN mkdir /site/database
+
+

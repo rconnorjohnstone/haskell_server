@@ -20,6 +20,7 @@ services:
       - PORT=$SITE_PORT
       - YESOD_PORT=$SITE_YESOD_PORT
       - SQLITE_DATABASE=$SITE_DATABASE
+      - ROBOT_PASS
     volumes:
       - ./main/app:/site/app
       - ./main/assets:/site/assets
@@ -29,6 +30,7 @@ services:
       - ./main/static:/site/static
       - ./main/templates:/site/templates
       - ./main/test:/site/test
+      - database-volume:/site/database/
     stdin_open: true
     entrypoint: ["entrypoint.sh"]
 

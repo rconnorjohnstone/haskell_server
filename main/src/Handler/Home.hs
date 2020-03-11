@@ -86,7 +86,7 @@ getHomeR = do
     setTitle "Richard Connor Johnstone"
     $(widgetFile "banner/banner")
     previewCard aboutMeParams
-    previewCard (recentParams recentBlog recentId True)
+    --previewCard (recentParams recentBlog recentId True)
     previewCard resourceParams
     projects [imdProject, attProject, wmsProject]
     $(widgetFile "contact/contact")
