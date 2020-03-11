@@ -4,6 +4,7 @@
 module Handler.Resources where
 
 import Layouts.HomeLayout
+import Database.Persist.Sql (fromSqlKey)
 import Import 
 
 -------------------------------------------------------------------------------

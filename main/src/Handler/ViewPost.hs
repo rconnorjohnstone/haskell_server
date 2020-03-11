@@ -28,7 +28,6 @@ getViewPostR blogPostId = do
   let Entity nextId _ = case nextBlog of
                     [] -> Prelude.head recentBlog
                     x -> Prelude.head x
-  blogPost <- runDB $ get404 blogPostId
   homeLayout $ do
     setTitle (toHtml $ blogPostTitle blogPost)
     let articleHtml = sanitize $ commonmarkToHtml [] [] (unTextarea $ blogPostArticle blogPost)

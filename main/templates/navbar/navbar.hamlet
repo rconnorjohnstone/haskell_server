@@ -9,12 +9,19 @@
         Resources
       <a .navBarLink .regularNav href=@{AllPostsR}>
         Blog
-      $maybe navMaid <- maid
-        <a .navBarLink .regularNav href=@{AuthR LogoutR}>
-          Logout
+      $maybe aid <- maid
+        $case fromSqlKey aid
+          $of 1
+            <a .navBarLink .regularNav href=@{AllDraftsR}>
+              Drafts
+            <a .navBarLink .regularNav href=@{AuthR LogoutR}>
+              Logout
+          $of _
+            <a .navBarLink .regularNav href=@{AuthR LogoutR}>
+              Logout
       $nothing
-        <a .navBarLink .regularNav href=@{AuthR LoginR}>
-          Login
+          <a .navBarLink .regularNav href=@{AuthR LoginR}>
+            Login
       <a .navBarLink .regularNav href="/#contact">
         Contact
       <div .navBarLink .mobile_menu>
@@ -28,9 +35,16 @@
             Resources
           <a .navBarLink .mobileNav href=@{AllPostsR}>
             Blog
-          $maybe navMaid <- maid
-            <a .navBarLink .mobileNav href=@{AuthR LogoutR}>
-              Logout
+          $maybe aid <- maid
+            $case fromSqlKey aid
+              $of 1
+                <a .navBarLink .mobileNav href=@{AllDraftsR}>
+                  Drafts
+                <a .navBarLink .mobileNav href=@{AuthR LogoutR}>
+                  Logout
+              $of _
+                <a .navBarLink .mobileNav href=@{AuthR LogoutR}>
+                  Logout
           $nothing
             <a .navBarLink .mobileNav href=@{AuthR LoginR}>
               Login

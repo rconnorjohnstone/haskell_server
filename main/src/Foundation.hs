@@ -20,47 +20,20 @@ import Network.HaskellNet.SMTP
 import qualified Network.HaskellNet.SMTP.SSL as SSL
 import System.Environment
 import qualified Yesod.Auth.Message       as Msg
-import           Control.Applicative      ((<$>), (<*>))
-
-import           Data.Word
-import           Control.Monad            (join)
-import           Control.Monad.Logger     (runNoLoggingT)
-import           Data.Maybe               (isJust)
-import           Data.Text                (Text, unpack)
-import qualified Data.Text.Lazy.Encoding
-import           Data.Typeable            (Typeable)
-import           Database.Persist.Sqlite
-import           Database.Persist.TH
-import           Network.Mail.Mime
-import           Text.Blaze.Html.Renderer.Utf8 (renderHtml)
-import           Text.Hamlet                   (shamlet)
-import           Text.Shakespeare.Text         (stext)
-import           Yesod
-import           Yesod.Auth
-
-import           Yesod.Form
-import           Control.Applicative      ((<$>), (<*>))
-import           Data.Text                (Text)
-import           Data.Text.Encoding       (decodeUtf8With, encodeUtf8)
-import           Data.Text.Encoding.Error (lenientDecode)
-import           Data.Time                (addUTCTime, getCurrentTime)
-import           Safe                     (readMay)
-import           System.IO.Unsafe         (unsafePerformIO)
-import           Data.Aeson.Types (Parser, Result(..), parseMaybe, withObject, (.:?))
-import           Data.Maybe (isJust)
-
+import Control.Applicative      ((<$>), (<*>))
+import Control.Monad            (join)
+import Data.Maybe               (isJust)
+import Data.Text                (Text)
+import Database.Persist.Sqlite
+import Yesod
+import Yesod.Auth
 import Import.NoFoundation hiding (unpack)
-import Database.Persist.Sql (ConnectionPool, runSqlPool)
+import Database.Persist.Sql (ConnectionPool, runSqlPool, fromSqlKey)
 import Text.Hamlet          (hamletFile)
 import Text.Jasmine         (minifym)
 import Control.Monad.Logger (LogSource)
-
--- Used only when in "auth-dummy-login" setting is enabled.
-import Yesod.Auth.Dummy
-
 import Yesod.Auth.Email
 import Yesod.Default.Util   (addStaticContentExternal)
-import Yesod.Core
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
 import qualified Data.CaseInsensitive as CI
@@ -143,49 +116,13 @@ instance Yesod App where
         master <- getYesod
         mmsg <- getMessage
 
-        muser <- maybeAuthPair
+        --muser <- maybeAuth
         mcurrentRoute <- getCurrentRoute
 
         -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
-        (title, parents) <- breadcrumbs
-
-        -- Define the menu items of the header.
-        let menuItems =
-                [ NavbarLeft $ MenuItem
-                    { menuItemLabel = "Home"
-                    , menuItemRoute = HomeR
-                    , menuItemAccessCallback = True
-                    }
-                , NavbarLeft $ MenuItem
-                    { menuItemLabel = "Profile"
-                    , menuItemRoute = ProfileR
-                    , menuItemAccessCallback = isJust muser
-                    }
-                , NavbarRight $ MenuItem
-                    { menuItemLabel = "Login"
-                    , menuItemRoute = AuthR LoginR
-                    , menuItemAccessCallback = isNothing muser
-                    }
-                , NavbarRight $ MenuItem
-                    { menuItemLabel = "Logout"
-                    , menuItemRoute = AuthR LogoutR
-                    , menuItemAccessCallback = isJust muser
-                    }
-                ]
-
-        let navbarLeftMenuItems = [x | NavbarLeft x <- menuItems]
-        let navbarRightMenuItems = [x | NavbarRight x <- menuItems]
-
-        let navbarLeftFilteredMenuItems = [x | x <- navbarLeftMenuItems, menuItemAccessCallback x] 
-        let navbarRightFilteredMenuItems = [x | x <- navbarRightMenuItems, menuItemAccessCallback x]
+        --(title, parents) <- breadcrumbs
 
         maid <- maybeAuthId
-
-        -- We break up the default layout into two components:
-        -- default-layout is the contents of the body tag, and
-        -- default-layout-wrapper is the entire page. Since the final
-        -- value passed to hamletToRepHtml cannot be a widget, this allows
-        -- you to use normal widget features in default-layout.
 
         pc <- widgetToPageContent $ do
             --addStylesheet $ StaticR css_bootstrap_css
@@ -316,8 +253,7 @@ instance YesodAuth App where
 
     -- You can add other plugins like Google Email, email or OAuth here
     authPlugins :: App -> [AuthPlugin App]
-    authPlugins app = [authEmail] ++ extraAuthPlugins
-        -- Enable authDummy login if enabled.
+    authPlugins _ = [authEmail] ++ extraAuthPlugins
         where extraAuthPlugins = []
 
 
@@ -368,7 +304,7 @@ instance YesodAuthEmail App where
         mu <- get uid
         case mu of
             Nothing -> return Nothing
-            Just u -> do
+            Just _ -> do
                 update uid [UserVerified =. True, UserVerkey =. Nothing]
                 return $ Just uid
     getPassword = liftHandler . runDB . fmap (join . fmap userPassword) . get
