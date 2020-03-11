@@ -16,15 +16,19 @@ services:
     restart: always
     ports:
       - 80:80
-    environment:
-      - ENV=development
     volumes:
       - type: bind
         source: ./config/nginx.conf
         target: /etc/nginx/nginx.conf
         read_only: true
+    environment:
+      - ENV=development
+    depends_on:
+      - main-site
+      - nextcloud
     networks:
       - main
+      - nextcloud
 
   # Main Yesod Site
   # -------------------------------------------------------
@@ -56,5 +60,48 @@ services:
     stdin_open: true
     entrypoint: ["entrypoint.sh"]
 
+  # Nextcloud
+  # -------------------------------------------------------
+  nextcloud:
+    image: nextcloud:apache
+    container_name: "nextcloud"
+    restart: always
+    environment:
+      - MYSQL_HOST=nextcloud-db
+      - MYSQL_DATABASE=myNextCloudDB
+      - MYSQL_USER=myNextCloudUser
+      - MYSQL_PASSWORD=$NC_MYSQL_PASSWORD
+      - NEXTCLOUD_TRUSTED_DOMAINS=$NC_DOMAINS
+    ports:
+      - 8082:80
+    volumes:
+      - nextcloud-storage:/var/www/html
+    networks:
+      - nextcloud
+    depends_on:
+      - nextcloud-db
+
+  # Nextcloud Database
+  # -------------------------------------------------------
+  nextcloud-db:
+    image: mariadb
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    volumes:
+      - nextcloud-db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=$NC_MYSQL_ROOT_PASSWORD
+      - MYSQL_PASSWORD=$NC_MYSQL_PASSWORD
+      - MYSQL_DATABASE=myNextCloudDB
+      - MYSQL_USER=myNextCloudUser
+    networks:
+      - nextcloud
+
 networks:
   main:
+  nextcloud:
+
+volumes:
+  nextcloud-storage:
+  nextcloud-db:
+
