@@ -1,24 +1,43 @@
 version: "3.7"
 
 services:
+  # Base Image
+  # -------------------------------------------------------
   base:
     build:
       context: .
       dockerfile: Dockerfile
     image: "base"
-  main:
+
+  # NGINX Proxy
+  # -------------------------------------------------------
+  proxy:
+    image: nginx:1.17.8
+    restart: always
+    ports:
+      - 80:80
+    environment:
+      - ENV=development
+    volumes:
+      - type: bind
+        source: ./config/nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: true
+    networks:
+      - main
+
+  # Main Yesod Site
+  # -------------------------------------------------------
+  main-site:
     build:
       context: ./main
       dockerfile: Dockerfile
-    image: "main"
+    image: "main-site"
+    container_name: "main-site"
     networks:
       - main
     ports:
-      - 80:3000
-      - 8080:3443
-      - 465:465
-      - 587:587
-      - 2525:2525
+      - 8080:3000
     environment:
       - PORT=$SITE_PORT
       - YESOD_PORT=$SITE_YESOD_PORT
