@@ -3,4 +3,5 @@
 set -e
 
 stack build
-exec stack exec -- yesod devel
+stack build yesod-bin
+stack exec -- yesod devel

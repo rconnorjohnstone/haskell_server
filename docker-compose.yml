@@ -14,7 +14,8 @@ services:
     networks:
       - main
     ports:
-      - 80:8080
+      - 80:3000
+      - 8080:3443
     environment:
       - PORT=$SITE_PORT
       - YESOD_PORT=$SITE_YESOD_PORT
@@ -28,6 +29,7 @@ services:
       - ./main/static:/site/static
       - ./main/templates:/site/templates
       - ./main/test:/site/test
+    stdin_open: true
     entrypoint: ["entrypoint.sh"]
 
 volumes:
