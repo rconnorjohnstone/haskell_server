@@ -15,18 +15,20 @@ services:
       - main
     ports:
       - 80:8080
+    environment:
+      - PORT=$SITE_PORT
+      - YESOD_PORT=$SITE_YESOD_PORT
+      - SQLITE_DATABASE=$SITE_DATABASE
     volumes:
-      - main/app:/main/app
-      - main/assets:/main/assets
-      - main/config:/main/config
-      - main/Layouts:/main/Layouts
-      - main/src:/main/src
-      - main/static:/main/static
-      - main/templates:/main/templates
-      - main/test:/main/test
-      - main/test:/main/test
-      - main/entrypoint:/bin/entrypoint
-    entrypoint: ["entrypoint"]
+      - ./main/app:/site/app
+      - ./main/assets:/site/assets
+      - ./main/config:/site/config
+      - ./main/Layouts:/site/Layouts
+      - ./main/src:/site/src
+      - ./main/static:/site/static
+      - ./main/templates:/site/templates
+      - ./main/test:/site/test
+    entrypoint: ["entrypoint.sh"]
 
 volumes:
   database-volume:

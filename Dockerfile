@@ -1,8 +1,10 @@
-FROM debian:latest
+FROM archlinux:latest
 
-RUN apt-get update && apt-get upgrade
+RUN pacman -Syu --noconfirm
 
-RUN apt-get install -y \
-    haskell-platform \
+RUN pacman -S --noconfirm \
+    ghc \
     nginx \
-    haskell-stack
+    stack \
+    make
+
