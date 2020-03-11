@@ -1,6 +1,7 @@
 FROM base
 
 RUN mkdir /site
+RUN mkdir /site/database
 WORKDIR /site
 
 COPY stack.yaml .
@@ -11,10 +12,4 @@ RUN stack setup --system-ghc
 RUN stack build --dependencies-only
 RUN stack build yesod-bin
 
-EXPOSE 3000 3443
-
 COPY entrypoint.sh /usr/bin/entrypoint.sh
-
-RUN mkdir /site/database
-
-

@@ -16,6 +16,9 @@ services:
     ports:
       - 80:3000
       - 8080:3443
+      - 465:465
+      - 587:587
+      - 2525:2525
     environment:
       - PORT=$SITE_PORT
       - YESOD_PORT=$SITE_YESOD_PORT
@@ -30,12 +33,9 @@ services:
       - ./main/static:/site/static
       - ./main/templates:/site/templates
       - ./main/test:/site/test
-      - database-volume:/site/database/
+      - ./main/database:/site/database/
     stdin_open: true
     entrypoint: ["entrypoint.sh"]
-
-volumes:
-  database-volume:
 
 networks:
   main:

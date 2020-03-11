@@ -6,8 +6,7 @@ module Handler.EditPost where
 import Layouts.HomeLayout
 import Import
 import Yesod.Form.Types ()
-import Database.Persist.Sql
-import CMarkGFM
+import Database.Persist.Sql (fromSqlKey)
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"
@@ -39,10 +38,10 @@ getEditPostR blogPostId = do
 postEditPostR :: BlogPostId -> Handler Html
 postEditPostR blogPostId = do
   foundBlogPost <- runDB $ get404 blogPostId
-  ((res, widget), enctype) <- runFormPost (draftForm foundBlogPost)
+  ((res, _), _) <- runFormPost (draftForm foundBlogPost)
   action <- lookupPostParam "action"
   case (res, action) of 
-    (FormSuccess (title, image, date, article), Just "delete") -> do
+    (FormSuccess _, Just "delete") -> do
       runDB $ delete blogPostId
       redirect $ AllPostsR
     (FormSuccess (title, image, date, article), Just "publish") -> do
@@ -55,9 +54,9 @@ postEditPostR blogPostId = do
 writeToServer :: FileInfo -> Handler FilePath
 writeToServer file = do
     let filename = unpack $ fileName file
-        path = imageFilePath filename
-    liftIO $ fileMove file path
-    return ("/" Prelude.++ path)
+        imagePath = imageFilePath filename
+    liftIO $ fileMove file imagePath
+    return ("/" Prelude.++ imagePath)
 
 imageFilePath :: String -> FilePath
 imageFilePath f = uploadDirectory </> f

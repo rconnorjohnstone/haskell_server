@@ -7,7 +7,6 @@ import Layouts.HomeLayout
 import Import
 import Yesod.Form.Types ()
 import Database.Persist.Sql
-import CMarkGFM
 
 uploadDirectory :: FilePath
 uploadDirectory = "static/img"
@@ -51,7 +50,7 @@ getViewDraftR blogDraftId = do
 postViewDraftR :: BlogDraftId -> Handler Html
 postViewDraftR blogDraftId = do
   foundBlogDraft <- runDB $ get404 blogDraftId
-  ((res, widget), enctype) <- runFormPost (draftForm foundBlogDraft)
+  ((res, _), _) <- runFormPost (draftForm foundBlogDraft)
   action <- lookupPostParam "action"
   case (res, action) of 
     (FormSuccess (title, image, date, article), Just "save") -> do
@@ -64,7 +63,7 @@ postViewDraftR blogDraftId = do
       let blogDraft = BlogDraft title imageLoc date article
       runDB $ replace blogDraftId $ blogDraft
       redirect $ PreviewDraftR blogDraftId
-    (FormSuccess (title, image, date, article), Just "delete") -> do
+    (FormSuccess _, Just "delete") -> do
       runDB $ delete blogDraftId
       redirect $ AllPostsR
     (FormSuccess (title, image, date, article), Just "publish") -> do
@@ -77,9 +76,9 @@ postViewDraftR blogDraftId = do
 writeToServer :: FileInfo -> Handler FilePath
 writeToServer file = do
     let filename = unpack $ fileName file
-        path = imageFilePath filename
-    liftIO $ fileMove file path
-    return ("/" Prelude.++ path)
+        imagePath = imageFilePath filename
+    liftIO $ fileMove file imagePath
+    return ("/" Prelude.++ imagePath)
 
 imageFilePath :: String -> FilePath
 imageFilePath f = uploadDirectory </> f

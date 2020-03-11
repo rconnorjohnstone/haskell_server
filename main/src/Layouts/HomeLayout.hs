@@ -12,7 +12,6 @@ import Import
 
 homeLayout :: Widget -> Handler Html
 homeLayout widget = do
-  maid <- maybeAuthId
   pc <- widgetToPageContent $ do
     widget
     $(widgetFile "site-layout")
